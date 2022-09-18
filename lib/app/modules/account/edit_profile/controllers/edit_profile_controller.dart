@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:owner_app/app/app_controller.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/app_utils.dart';
@@ -10,18 +11,22 @@ class EditProfileController extends GetxController {
   final isLoading = false.obs;
   late final TextEditingController fnameController;
   late final TextEditingController lnameController;
-  late final TextEditingController emailController;
+  late final TextEditingController phoneController;
+  final appController = Get.find<AppController>();
 
   final fnameError = ''.obs;
   final lnameError = ''.obs;
-  final emailError = ''.obs;
+  final phoneError = ''.obs;
 
   @override
   void onInit() {
     super.onInit();
-    fnameController = TextEditingController(text: 'fname');
-    lnameController = TextEditingController(text: 'lname');
-    emailController = TextEditingController(text: 'email@email.com');
+    fnameController =
+        TextEditingController(text: appController.profile!.firstName);
+    lnameController =
+        TextEditingController(text: appController.profile!.lastName);
+    phoneController =
+        TextEditingController(text: appController.profile!.phoneNumber);
 
     fnameController.addListener(() {
       fnameError.value = "";
@@ -30,8 +35,8 @@ class EditProfileController extends GetxController {
       lnameError.value = "";
     });
 
-    emailController.addListener(() {
-      emailError.value = "";
+    phoneController.addListener(() {
+      phoneError.value = "";
     });
   }
 
@@ -46,11 +51,11 @@ class EditProfileController extends GetxController {
     String fname = fnameController.text.trim();
     String lname = lnameController.text.trim();
 
-    String email = emailController.text.trim();
+    String phone = phoneController.text.trim();
     if (validateInput(
       fname,
       lname,
-      email,
+      phone,
     )) {
       await Future.delayed(2.seconds);
       showSnackbar('Edit Successful');
@@ -60,10 +65,10 @@ class EditProfileController extends GetxController {
     isLoading(false);
   }
 
-  bool validateInput(String fname, String lname, String email) {
+  bool validateInput(String fname, String lname, String phone) {
     bool isValid = true;
-    if (!email.isEmail) {
-      emailError("Enter a valid email");
+    if (!phone.isPhoneNumber) {
+      phoneError("Enter a valid phone");
       isValid = false;
     }
 
@@ -93,6 +98,6 @@ class EditProfileController extends GetxController {
     fnameController.dispose();
     lnameController.dispose();
 
-    emailController.dispose();
+    phoneController.dispose();
   }
 }

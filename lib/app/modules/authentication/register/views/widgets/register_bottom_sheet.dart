@@ -109,7 +109,8 @@ class RegisterBottomSheet extends StatelessWidget {
                 const Text('Already have an Account?'),
                 TextButton(
                     onPressed: () {
-                      Get.to(() => LoginView());
+                      Get.back();
+                      Get.back();
                     },
                     child: const Text(
                       'Sign in',

@@ -3,17 +3,22 @@ import 'package:dio/dio.dart';
 class ServerError implements Exception {
   int _errorCode = 0;
   String _errorMessage = "";
+  Map<String, dynamic>? _error;
 
   ServerError.withError({required DioError error}) {
     _handleError(error);
   }
 
-  getErrorCode() {
+  int getErrorCode() {
     return _errorCode;
   }
 
-  getErrorMessage() {
+  String getErrorMessage() {
     return _errorMessage;
+  }
+
+  Map<String, dynamic>? getError() {
+    return _error;
   }
 
   _handleError(DioError error) {
@@ -43,12 +48,17 @@ class ServerError implements Exception {
         try {
           _errorMessage = error.message.toString();
           if (error.response!.data["detail"] != null) {
-            _errorMessage = error.response!.data["detail"];
-          } else if (error.response!.data['error'] != null) {
-            _errorMessage = error.response!.data["error"];
-          } else if (error.response!.data['old_password'] != null) {
-            _errorMessage = error.response!.data["old_password"][0];
+            _errorMessage = error.response!.data["detail"].toString();
           }
+          if (error.response!.data["message"] != null) {
+            _errorMessage = error.response!.data["message"].toString();
+          }
+          if (error.response!.data is Map<String, dynamic>) {
+            _error = error.response!.data;
+          }
+          // else if (error.response!.data["error"] != null) {
+          //   _error = error.response!.data["error"];
+          // }
         } catch (e) {
           print("Error response = " + e.toString());
         }

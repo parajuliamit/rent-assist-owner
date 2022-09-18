@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const baseUrl = "https://";
+const baseUrl = "https://rent-assist-2021.herokuapp.com";
 
 const kPrimaryColor = Color(0xFF83BCA9);
 const kDarkGreen = Color(0xFF3E5641);
