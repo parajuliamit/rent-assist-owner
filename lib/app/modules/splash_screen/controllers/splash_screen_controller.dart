@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../../../app_repository.dart';
+import '../../../app_repository.dart';
 import '../../../app_controller.dart';
 import '../../../routes/app_pages.dart';
 

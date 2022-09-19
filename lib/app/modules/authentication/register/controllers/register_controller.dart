@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:owner_app/app_repository.dart';
+import 'package:owner_app/app/app_repository.dart';
 
 import '../../../../data/api/auth/register_request.dart';
 import '../../../../data/exception/server_exception.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/app_utils.dart';
-import '../views/widgets/register_bottom_sheet.dart';
 
 class RegisterController extends GetxController {
   final authRepo = Get.find<AppRepository>().getAuthRepository();

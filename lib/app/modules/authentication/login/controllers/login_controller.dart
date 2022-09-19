@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../app_repository.dart';
+import '../../../../app_repository.dart';
 import '../../../../data/exception/server_exception.dart';
 import '../../../../data/models/auth/login_request.dart';
 import '../../../../routes/app_pages.dart';

@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import 'app/data/interceptor/authentication_interceptor.dart';
-import 'app/data/repository/auth_repository.dart';
-import 'app/data/repository/user_repository.dart';
-import 'app/utils/constants.dart';
+import 'data/interceptor/authentication_interceptor.dart';
+import 'data/repository/auth_repository.dart';
+import 'data/repository/user_repository.dart';
+import 'utils/constants.dart';
 
 class AppRepository extends GetxService {
   final Dio _dioClient;

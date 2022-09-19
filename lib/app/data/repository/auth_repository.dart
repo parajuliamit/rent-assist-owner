@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../../app_repository.dart';
+import '../../app_repository.dart';
 import '../../app_controller.dart';
 import '../api/auth/auth_api.dart';
 import '../api/auth/register_request.dart';
