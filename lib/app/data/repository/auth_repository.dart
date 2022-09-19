@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import '../../../app_repository.dart';
 import '../../app_controller.dart';
 import '../api/auth/auth_api.dart';
+import '../api/auth/register_request.dart';
 import '../models/auth/login_request.dart';
 
 class AuthRepository {
@@ -41,14 +42,14 @@ class AuthRepository {
   //   return await LoginResponseCache(this._sharedPreferences).get();
   // }
 
-  // Future<LoginResponse> registerUser(RegisterRequest registerRequest) async {
-  //   LoginResponse loginResponse;
+  Future<void> registerUser(RegisterRequest registerRequest) async {
+    // LoginResponse loginResponse;
 
-  //   loginResponse = await AuthApi(_dio).register(registerRequest);
+    await AuthApi(_dio).register(registerRequest);
 
-  //   LoginResponseCache(_sharedPreferences).set(loginResponse);
-  //   return loginResponse;
-  // }
+    // LoginResponseCache(_sharedPreferences).set(loginResponse);
+    // return loginResponse;
+  }
 
   // Future<void> verifyOtp(VerifyOtp verifyOtp) async {
   //   await AuthApi(_dio).verify(verifyOtp);

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:owner_app/app/data/api/auth/register_request.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../models/auth/login_request.dart';
@@ -13,8 +14,8 @@ abstract class AuthApi {
   @POST("/auth/login/")
   Future<LoginResponse> login(@Body() LoginRequest loginRequest);
 
-  // @POST("users/register/")
-  // Future<LoginResponse> register(@Body() RegisterRequest registerRequest);
+  @POST("/auth/register/")
+  Future<LoginResponse> register(@Body() RegisterRequest registerRequest);
 
   // @POST("users/verify/")
   // // Future<void> verify(@Body() VerifyOtp verifyOtp);

@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
-import 'package:owner_app/app/modules/notification/views/notification_view.dart';
 
 import '../modules/account/change_password/bindings/change_password_binding.dart';
 import '../modules/account/change_password/views/change_password_view.dart';
 import '../modules/account/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/account/edit_profile/views/edit_profile_view.dart';
+import '../modules/add_tenant/bindings/add_tenant_binding.dart';
+import '../modules/add_tenant/views/add_tenant_view.dart';
 import '../modules/authentication/login/bindings/login_binding.dart';
 import '../modules/authentication/login/views/login_view.dart';
 import '../modules/authentication/register/bindings/register_binding.dart';
@@ -17,6 +18,7 @@ import '../modules/complaint/bindings/complaint_binding.dart';
 import '../modules/complaint/views/complaint_view.dart';
 import '../modules/navigation/bindings/navigation_binding.dart';
 import '../modules/navigation/views/navigation_view.dart';
+import '../modules/notification/views/notification_view.dart';
 import '../modules/rent_viewpage/bindings/rent_viewpage_binding.dart';
 import '../modules/rent_viewpage/views/rent_viewpage_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
@@ -103,6 +105,11 @@ class AppPages {
       name: _Paths.BALANCE_VIEWPAGE,
       page: () => BalanceViewpageView(),
       binding: BalanceViewpageBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_TENANT,
+      page: () => AddTenantView(),
+      binding: AddTenantBinding(),
     ),
   ];
 }

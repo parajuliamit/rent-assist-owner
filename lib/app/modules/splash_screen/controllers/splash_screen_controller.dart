@@ -1,9 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 import '../../../../app_repository.dart';
 import '../../../app_controller.dart';
-import '../../../data/exception/server_exception.dart';
 import '../../../routes/app_pages.dart';
 
 class SplashScreenController extends GetxController {

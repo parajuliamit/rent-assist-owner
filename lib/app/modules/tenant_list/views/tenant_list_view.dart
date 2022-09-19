@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:owner_app/app/routes/app_pages.dart';
 
 import '../../../utils/constants.dart';
 import '../../home/views/widgets/hompage_button.dart';
@@ -13,17 +14,12 @@ class TenantListView extends GetView<TenantListController> {
       appBar: AppBar(
         title: Text('TenantList'),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.add_outlined,
-              color: kPrimaryColor,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
-        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed(Routes.ADD_TENANT);
+        },
+        child: Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: 7,

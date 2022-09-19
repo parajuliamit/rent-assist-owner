@@ -6,7 +6,6 @@ import '../../../../../widgets/custom_buttom.dart';
 import '../../../../../widgets/input_field.dart';
 import '../../../../../widgets/loading.dart';
 import '../../../../../widgets/password_field.dart';
-import '../../../login/views/login_view.dart';
 import '../../controllers/register_controller.dart';
 
 class RegisterBottomSheet extends StatelessWidget {
@@ -18,6 +17,7 @@ class RegisterBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<RegisterController>();
     return Container(
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: SingleChildScrollView(
         child: Column(
@@ -70,8 +70,20 @@ class RegisterBottomSheet extends StatelessWidget {
               ),
             ),
             Obx(
+              () => InputField(
+                'Phone',
+                icon: const Icon(
+                  Icons.phone,
+                ),
+                controller: controller.phoneController,
+                inputType: TextInputType.phone,
+                textInputAction: TextInputAction.next,
+                errorMessage: controller.phoneError.value,
+              ),
+            ),
+            Obx(
               () => PasswordField(
-                'password',
+                'Password',
                 controller: controller.passwordController,
                 errorMessage: controller.passwordError.value,
               ),
@@ -110,7 +122,7 @@ class RegisterBottomSheet extends StatelessWidget {
                 TextButton(
                     onPressed: () {
                       Get.back();
-                      Get.back();
+                      // Get.back();
                     },
                     child: const Text(
                       'Sign in',
