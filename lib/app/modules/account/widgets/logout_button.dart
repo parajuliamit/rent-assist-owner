@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:owner_app/app/app_repository.dart';
+import 'package:owner_app/app/routes/app_pages.dart';
 
 import '../../../utils/constants.dart';
 
@@ -10,11 +13,14 @@ class LogoutButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
           side: const BorderSide(color: kPrimaryColor)),
-      onPressed: () {},
+      onPressed: () {
+        Get.find<AppRepository>().getAuthRepository().logout();
+        Get.offAllNamed(Routes.LOGIN);
+      },
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.75,
         child: Stack(
-          children: [
+          children: const [
             Center(
               child: Text(
                 'Logout',

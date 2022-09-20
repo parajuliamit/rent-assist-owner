@@ -31,27 +31,12 @@ class AccountView extends GetView<AccountController> {
               icon: Icons.change_circle_outlined,
               label: 'Change Password',
               onPress: () {
-                // Get.to(() => ChangePasswordView());
                 Get.toNamed(Routes.CHANGE_PASSWORD);
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            // TextButton.icon(
-            //   style: TextButton.styleFrom(
-            //     textStyle: TextStyle(color: Colors.blue),
-            //     backgroundColor: kPrimaryColor,
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(10.0),
-            //     ),
-            //   ),
-            //   onPressed: () => {},
-            //   icon: Icon(Icons.logout),
-            //   label: Text(
-            //     'Logout',
-            //   ),
-            // ),
             LogoutButton(),
           ],
         )),

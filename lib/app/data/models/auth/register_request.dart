@@ -1,5 +1,5 @@
 class RegisterRequest {
-  String username;
+  String email;
   String password1;
   String password2;
   String firstName;
@@ -7,7 +7,7 @@ class RegisterRequest {
   String phoneNumber;
 
   RegisterRequest(
-      {required this.username,
+      {required this.email,
       required this.password1,
       required this.password2,
       required this.firstName,
@@ -16,7 +16,8 @@ class RegisterRequest {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["username"] = this.username;
+    data["username"] = this.email;
+    data["email"] = this.email;
     data["password1"] = this.password1;
     data["password2"] = this.password2;
     data["first_name"] = this.firstName;

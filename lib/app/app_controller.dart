@@ -70,8 +70,8 @@ class AppController extends GetxController {
     isLoggedIn = true;
   }
 
-  // void logout() {
-  //   isLoggedIn = false;
-  //   profile = null;
-  // }
+  void logout() {
+    isLoggedIn = false;
+    profile = null;
+  }
 }

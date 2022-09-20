@@ -1,17 +1,20 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:owner_app/app/app_repository.dart';
 
-import '../../../../data/api/auth/register_request.dart';
+import '../../../../data/models/auth/register_device_request.dart';
+import '../../../../data/models/auth/register_request.dart';
 import '../../../../data/exception/server_exception.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/app_utils.dart';
 
 class RegisterController extends GetxController {
   final authRepo = Get.find<AppRepository>().getAuthRepository();
-  // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final isLoading = false.obs;
+
   late final TextEditingController fnameController;
   late final TextEditingController lnameController;
   late final TextEditingController emailController;
@@ -69,7 +72,6 @@ class RegisterController extends GetxController {
   }
 
   Future<void> register() async {
-    isLoading(true);
     String fname = fnameController.text.trim();
     String lname = lnameController.text.trim();
 
@@ -81,12 +83,13 @@ class RegisterController extends GetxController {
     if (validateInput(fname, lname, email, phone, password, confirmPassword)) {
       try {
         await authRepo.registerUser(RegisterRequest(
-            username: email,
+            email: email,
             firstName: fname,
             lastName: lname,
             password1: password,
             password2: confirmPassword,
             phoneNumber: phone));
+        registerDeviceId();
         showSnackbar('Register Successful');
         Get.toNamed(Routes.HOME);
       } catch (e) {
@@ -96,12 +99,20 @@ class RegisterController extends GetxController {
           showSnackbar(e.toString(), isError: true);
         }
       }
-      // await Future.delayed(2.seconds);
-      showSnackbar('Register Successful');
-      Get.toNamed(Routes.HOME);
     }
+  }
 
-    isLoading(false);
+  void registerDeviceId() async {
+    try {
+      var messaging = FirebaseMessaging.instance;
+      var deviceToken = await messaging.getToken();
+      if (deviceToken == null) return;
+      await authRepo.registerDevice(RegisterDeviceRequest(
+          registrationId: deviceToken,
+          type: Platform.isIOS ? 'ios' : 'android'));
+    } catch (e) {
+      print(e);
+    }
   }
 
   void handleError(DioError e) {
@@ -111,8 +122,8 @@ class RegisterController extends GetxController {
       if (error.containsKey('non_field_errors')) {
         showSnackbar(error['non_field_errors']![0], isError: true);
       }
-      if (error.containsKey('username')) {
-        emailError.value = error['username']![0];
+      if (error.containsKey('email')) {
+        emailError.value = error['email']![0];
       }
       if (error.containsKey('password1')) {
         passwordError.value = error['password1']![0];
@@ -168,8 +179,6 @@ class RegisterController extends GetxController {
     }
     return isValid;
   }
-
-  // }
 
   @override
   void onClose() {

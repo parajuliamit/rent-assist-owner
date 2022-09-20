@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../utils/app_utils.dart';
 import '../../../../../utils/constants.dart';
 import '../../../../../widgets/custom_buttom.dart';
 import '../../../../../widgets/input_field.dart';
@@ -27,7 +28,7 @@ class RegisterBottomSheet extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Create Account',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
               ),
             ),
             const SizedBox(
@@ -93,28 +94,25 @@ class RegisterBottomSheet extends StatelessWidget {
             ),
             Obx(
               () => PasswordField(
-                'confirm password',
+                'Confirm Password',
                 controller: controller.confirmPasswordController,
                 errorMessage: controller.confirmPasswordError.value,
               ),
             ),
             const SizedBox(
-              height: 50,
+              height: 30,
             ),
-            Obx(() => controller.isLoading.isTrue
-                ? const Loading(
-                    size: 100,
-                  )
-                : Center(
-                    child: CustomButton(
-                    'Submit',
-                    () {
-                      controller.register();
-                    },
-                    fillColor: kWhiteColor,
-                    textColor: kPrimaryColor,
-                  ))),
-            const SizedBox(height: 10),
+            Center(
+                child: CustomButton(
+              'Submit',
+              () {
+                FocusScope.of(context).unfocus();
+                overlayLoading(controller.register);
+              },
+              fillColor: kWhiteColor,
+              textColor: kPrimaryColor,
+            )),
+            const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

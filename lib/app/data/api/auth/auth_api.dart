@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:owner_app/app/data/api/auth/register_request.dart';
+import 'package:owner_app/app/data/models/auth/register_request.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../models/auth/login_request.dart';
 import '../../models/auth/login_response.dart';
+import '../../models/auth/register_device_request.dart';
 
 part 'auth_api.g.dart';
 
@@ -16,6 +17,10 @@ abstract class AuthApi {
 
   @POST("/auth/register/")
   Future<LoginResponse> register(@Body() RegisterRequest registerRequest);
+
+  @POST("/api/notifications/devices/")
+  Future<void> registerDevice(
+      @Body() RegisterDeviceRequest registerDeviceRequest);
 
   // @POST("users/verify/")
   // // Future<void> verify(@Body() VerifyOtp verifyOtp);
