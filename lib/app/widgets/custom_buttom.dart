@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
           side: const BorderSide(color: kPrimaryColor)),
       onPressed: onpress,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.75,
+        // width: MediaQuery.of(context).size.width * 0.75,
         child: Center(
           child: Text(
             text,
