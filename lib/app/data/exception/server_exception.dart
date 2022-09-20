@@ -65,7 +65,7 @@ class ServerError implements Exception {
         if (_errorCode >= 500 && _errorCode <= 599) {
           _errorMessage = '$_errorCode: Server Error';
         }
-        if (_errorCode == 502) {
+        if (_errorCode == 503) {
           _errorMessage =
               'We are under maintenance. Please try again in a moment. Thank you.';
         }

@@ -51,71 +51,59 @@ class _ScanBattiContainerState extends State<ScanBattiContainer> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Scan Meter',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ScanMeterContainer(
-                  title: const Text(
-                    'Tap to Scan Meter',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ScanMeterContainer(
+                title: const Text(
+                  'Tap to Scan Meter',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
                   ),
-                  subtitle: Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: kWhiteColor,
-                        boxShadow: [
-                          BoxShadow(
-                              color: kPrimaryColor.withOpacity(0.4),
-                              spreadRadius: 3,
-                              blurRadius: 7,
-                              offset: const Offset(1, 2))
-                        ]),
-                    child: const Icon(
-                      Icons.document_scanner_outlined,
-                      color: kPrimaryColor,
-                    ),
-                  ),
-                  onPress: () {
-                    getImage(ImageSource.camera);
-                    // Get.toNamed(Routes.TENANT_LIST);
-                  },
                 ),
-              ],
-            ),
+                subtitle: Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(color: kWhiteColor, boxShadow: [
+                    BoxShadow(
+                        color: kPrimaryColor.withOpacity(0.4),
+                        spreadRadius: 3,
+                        blurRadius: 7,
+                        offset: const Offset(1, 2))
+                  ]),
+                  child: const Icon(
+                    Icons.document_scanner_outlined,
+                    color: kPrimaryColor,
+                  ),
+                ),
+                onPress: () {
+                  getImage(ImageSource.camera);
+                  // Get.toNamed(Routes.TENANT_LIST);
+                },
+              ),
+            ],
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            'The scanned meter is:',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          _image != null
-              ? Image.file(
-                  _image!,
-                  height: 250,
-                  width: 250,
-                  fit: BoxFit.cover,
-                )
-              : Image.asset('assets/images/haribahadur.jpeg')
+          // SizedBox(
+          //   height: 20,
+          // ),
+          // Text(
+          //   'The scanned meter is:',
+          //   style: TextStyle(
+          //     fontWeight: FontWeight.bold,
+          //     fontSize: 15,
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          // _image != null
+          //     ? Image.file(
+          //         _image!,
+          //         height: 250,
+          //         width: 250,
+          //         fit: BoxFit.cover,
+          //       )
+          //     : Image.asset('assets/images/haribahadur.jpeg')
         ],
       ),
     );

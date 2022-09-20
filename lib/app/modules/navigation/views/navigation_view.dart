@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:owner_app/app/utils/constants.dart';
 
-import '../../../utils/constants.dart';
 import '../controllers/navigation_controller.dart';
 
 class NavigationView extends GetView<NavigationController> {
@@ -43,7 +43,7 @@ class NavigationView extends GetView<NavigationController> {
               //       borderRadius: BorderRadius.circular(20)),
               // ),
               BottomBarIcon(
-                  icon: Icons.person_add_alt, controller: controller, index: 3),
+                  icon: Icons.group, controller: controller, index: 3),
               BottomBarIcon(
                   icon: Icons.person, controller: controller, index: 4),
             ],
@@ -76,7 +76,7 @@ class BottomBarIcon extends StatelessWidget {
       icon: Icon(
         icon,
         color: controller.selectedIndex.value == index
-            ? Colors.black
+            ? kPrimaryColor
             : Colors.grey,
       ),
     );

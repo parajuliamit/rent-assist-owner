@@ -12,20 +12,20 @@ class TenantListView extends GetView<TenantListController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TenantList'),
+        title: const Text('My Tenants'),
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed(Routes.ADD_TENANT);
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: 7,
         itemBuilder: (context, index) {
           return Card(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(

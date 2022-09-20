@@ -28,7 +28,8 @@ class SplashScreenController extends GetxController {
         var profile = await Get.find<AppRepository>()
             .getUserRepository()
             .getUserProfile();
-        if (profile?.isOwner != false) {
+        if (profile?.isOwner != true) {
+          appRepo.getAuthRepository().logout();
           Get.offAllNamed(Routes.LOGIN);
           return;
         }
@@ -42,6 +43,7 @@ class SplashScreenController extends GetxController {
         isError(true);
         errorMessage = "Check your internet connection";
       } else {
+        appRepo.getAuthRepository().logout();
         Get.offAllNamed(Routes.LOGIN);
         return;
       }

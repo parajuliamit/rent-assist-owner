@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../app_controller.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/constants.dart';
 
@@ -10,25 +11,26 @@ class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20),
+      margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            children: const [
-              CircleAvatar(
+            children: [
+              const CircleAvatar(
                 radius: 25,
                 child: Icon(
                   Icons.person,
                   size: 30,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Text(
-                'Hello Sunil',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                'Welcome, ${Get.find<AppController>().profile?.firstName}',
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
             ],
           ),
