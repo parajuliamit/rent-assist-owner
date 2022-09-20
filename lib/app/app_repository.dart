@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:owner_app/app/data/repository/ocr_repository.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'data/interceptor/authentication_interceptor.dart';
@@ -38,5 +39,9 @@ class AppRepository extends GetxService {
 
   UserRepository getUserRepository() {
     return UserRepository(_dioClient);
+  }
+
+  OcrRepository getOcrRepository() {
+    return OcrRepository(_dioClient);
   }
 }

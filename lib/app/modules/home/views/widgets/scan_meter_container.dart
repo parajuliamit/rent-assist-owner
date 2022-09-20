@@ -2,13 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:owner_app/app/modules/home/views/widgets/icon_container.dart';
+import 'package:owner_app/app/utils/app_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 import '../../../../utils/constants.dart';
+import '../../controllers/home_controller.dart';
 
 class ScanBattiContainer extends StatefulWidget {
   const ScanBattiContainer({
@@ -20,8 +23,8 @@ class ScanBattiContainer extends StatefulWidget {
 }
 
 class _ScanBattiContainerState extends State<ScanBattiContainer> {
-  File? _image;
   final imageCropper = ImageCropper();
+  String? _scanData;
 
   Future getImage(ImageSource source) async {
     try {
@@ -48,9 +51,12 @@ class _ScanBattiContainerState extends State<ScanBattiContainer> {
       final imagePermanent =
           await savefilePermamently(cropped?.path ?? image.path);
 
-      setState(() {
-        _image = imagePermanent;
-      });
+      overlayLoading(
+        () async {
+          _scanData = await Get.find<HomeController>().scanOcr(imagePermanent);
+          setState(() {});
+        },
+      );
     } on PlatformException catch (e) {
       print('failed to pick image $e');
     }
@@ -133,27 +139,17 @@ class _ScanBattiContainerState extends State<ScanBattiContainer> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
-            'The scanned meter is:',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
+          if (_scanData != null)
+            Text(
+              'The scanned meter is: $_scanData',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
             ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          _image != null
-              ? Image.file(
-                  _image!,
-                  height: 250,
-                  width: 250,
-                  fit: BoxFit.cover,
-                )
-              : Image.asset('assets/images/haribahadur.jpeg')
         ],
       ),
     );
