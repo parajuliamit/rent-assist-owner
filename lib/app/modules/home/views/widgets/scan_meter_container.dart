@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:owner_app/app/modules/home/views/widgets/icon_container.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
@@ -19,17 +21,35 @@ class ScanBattiContainer extends StatefulWidget {
 
 class _ScanBattiContainerState extends State<ScanBattiContainer> {
   File? _image;
+  final imageCropper = ImageCropper();
 
   Future getImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
 
-      // final imageTemporary = File(image.path);
-      final imagePermanent = await savefilePermamently(image.path);
+      var cropped = (await imageCropper.cropImage(
+        sourcePath: image.path,
+        cropStyle: CropStyle.rectangle,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.ratio16x9,
+        ],
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Crop Reading',
+              toolbarColor: kPrimaryColor,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.ratio16x9,
+              hideBottomControls: true,
+              lockAspectRatio: true),
+        ],
+      ));
+
+      final imagePermanent =
+          await savefilePermamently(cropped?.path ?? image.path);
 
       setState(() {
-        this._image = imagePermanent;
+        _image = imagePermanent;
       });
     } on PlatformException catch (e) {
       print('failed to pick image $e');
@@ -76,34 +96,64 @@ class _ScanBattiContainerState extends State<ScanBattiContainer> {
                     color: kPrimaryColor,
                   ),
                 ),
-                onPress: () {
-                  getImage(ImageSource.camera);
-                  // Get.toNamed(Routes.TENANT_LIST);
+                onPress: () async {
+                  await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Select Image Source'),
+                          content: Row(
+                            children: [
+                              Expanded(
+                                child: IconContainer(
+                                    icon: Icons.camera_alt_outlined,
+                                    title: 'Camera',
+                                    onTap: () async {
+                                      await getImage(ImageSource.camera);
+                                      Navigator.pop(context);
+                                    }),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Expanded(
+                                child: IconContainer(
+                                    icon: Icons.image_outlined,
+                                    title: 'Gallery',
+                                    onTap: () async {
+                                      await getImage(ImageSource.gallery);
+                                      Navigator.pop(context);
+                                    }),
+                              ),
+                            ],
+                          ),
+                        );
+                      });
                 },
               ),
             ],
           ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          // Text(
-          //   'The scanned meter is:',
-          //   style: TextStyle(
-          //     fontWeight: FontWeight.bold,
-          //     fontSize: 15,
-          //   ),
-          // ),
-          // SizedBox(
-          //   height: 10,
-          // ),
-          // _image != null
-          //     ? Image.file(
-          //         _image!,
-          //         height: 250,
-          //         width: 250,
-          //         fit: BoxFit.cover,
-          //       )
-          //     : Image.asset('assets/images/haribahadur.jpeg')
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            'The scanned meter is:',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          _image != null
+              ? Image.file(
+                  _image!,
+                  height: 250,
+                  width: 250,
+                  fit: BoxFit.cover,
+                )
+              : Image.asset('assets/images/haribahadur.jpeg')
         ],
       ),
     );

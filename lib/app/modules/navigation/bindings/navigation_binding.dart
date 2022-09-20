@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:owner_app/app/modules/balance_status/controllers/balance_status_controller.dart';
+import 'package:owner_app/app/modules/tenant_list/controllers/tenant_list_controller.dart';
 
 import '../../account/controllers/account_controller.dart';
-import '../../chat/controllers/chat_controller.dart';
 import '../../home/controllers/home_controller.dart';
+import '../../messages/controllers/messages_controller.dart';
 import '../../notification/controllers/notification_controller.dart';
 import '../controllers/navigation_controller.dart';
 
@@ -15,15 +17,18 @@ class NavigationBinding extends Bindings {
     Get.lazyPut<HomeController>(
       () => HomeController(),
     );
-    Get.lazyPut<ChatController>(
-      () => ChatController(),
+    Get.lazyPut<MessagesController>(
+      () => MessagesController(),
     );
 
-    Get.lazyPut<NotificationController>(
-      () => NotificationController(),
+    Get.lazyPut<BalanceStatusController>(
+      () => BalanceStatusController(),
     );
     Get.lazyPut<AccountController>(
       () => AccountController(),
+    );
+    Get.lazyPut<TenantListController>(
+      () => TenantListController(),
     );
   }
 }

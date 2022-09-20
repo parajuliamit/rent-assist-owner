@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class ChatController extends GetxController {
-  //TODO: Implement ChatControllerController
+class MessagesController extends GetxController {
+  //TODO: Implement MessagesController
 
   final count = 0.obs;
   @override
