@@ -21,8 +21,8 @@ class AuthRepository {
     final appController = Get.find<AppController>();
     var profile =
         await Get.find<AppRepository>().getUserRepository().getUserProfile();
-    if (profile?.isOwner != false) {
-      throw Exception('You are not a tenant');
+    if (profile?.isOwner != true) {
+      throw Exception('You are not an owner.');
     }
     appController.login(profile!);
   }

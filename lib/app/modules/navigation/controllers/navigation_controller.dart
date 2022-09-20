@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:owner_app/app/modules/balance_status/views/balance_status_view.dart';
-import 'package:owner_app/app/modules/tenant_list/views/tenant_list_view.dart';
 
 import '../../account/views/account_view.dart';
-import '../../chat/views/chat_view.dart';
+import '../../balance_status/views/balance_status_view.dart';
 import '../../home/views/home_view.dart';
+import '../../messages/views/messages_view.dart';
+import '../../tenant_list/views/tenant_list_view.dart';
 
 class NavigationController extends GetxController {
   final selectedIndex = 0.obs;
 
   List<Widget> pages = [
     HomeView(),
-    ChatView(),
+    MessagesView(),
     BalanceStatusView(),
     TenantListView(),
     AccountView()

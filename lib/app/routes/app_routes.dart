@@ -8,16 +8,14 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
   static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
-  static const NAVIGATION = _Paths.NAVIGATION;
   static const NOTIFICATION = _Paths.NOTIFICATION;
   static const COMPLAINT = _Paths.COMPLAINT;
-  static const BALANCE_STATUS = _Paths.BALANCE_STATUS;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
-  static const TENANT_LIST = _Paths.TENANT_LIST;
   static const RENT_VIEWPAGE = _Paths.RENT_VIEWPAGE;
   static const BALANCE_VIEWPAGE = _Paths.BALANCE_VIEWPAGE;
   static const ADD_TENANT = _Paths.ADD_TENANT;
+  static const CHAT = _Paths.CHAT;
 }
 
 abstract class _Paths {
@@ -25,7 +23,6 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const SPLASH_SCREEN = '/splash-screen';
-  static const NAVIGATION = '/navigation';
   static const NOTIFICATION = '/notification';
   static const COMPLAINT = '/complaint';
   static const BALANCE_STATUS = '/balance-status';
@@ -35,4 +32,5 @@ abstract class _Paths {
   static const RENT_VIEWPAGE = '/rent-viewpage';
   static const BALANCE_VIEWPAGE = '/balance-viewpage';
   static const ADD_TENANT = '/add-tenant';
+  static const CHAT = '/chat';
 }
