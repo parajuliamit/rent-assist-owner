@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:owner_app/app/modules/authentication/forgot_password/views/forgot_password_view.dart';
 
 import '../../../../../routes/app_pages.dart';
 import '../../../../../utils/app_utils.dart';
@@ -68,7 +69,9 @@ class LoginBottomSheet extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(ForgotPasswordView());
+                    },
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
