@@ -16,6 +16,7 @@ class ComplaintController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadComplaints();
   }
 
   void loadComplaints() async {

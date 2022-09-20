@@ -17,6 +17,6 @@ abstract class UserApi {
   @GET("/api/complaints/")
   Future<ComplaintsResponse> getComplaints();
 
-  @GET("/api/notifications/")
+  @GET("/api/notifications/notification/")
   Future<NotificationResponse> getNotifications();
 }
