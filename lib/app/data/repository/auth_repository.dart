@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import '../../app_repository.dart';
 import '../../app_controller.dart';
 import '../api/auth/auth_api.dart';
+import '../models/auth/change_password_request.dart';
 import '../models/auth/register_device_request.dart';
 import '../models/auth/register_request.dart';
 import '../models/auth/login_request.dart';
@@ -53,6 +54,12 @@ class AuthRepository {
         await Get.find<AppRepository>().getUserRepository().getUserProfile();
     appController.login(profile!);
   }
+
+  Future<void> changePassword(
+      ChangePasswordRequest changePasswordRequest) async {
+    return await AuthApi(_dio).changePassword(changePasswordRequest);
+  }
+
   // Future<void> verifyOtp(VerifyOtp verifyOtp) async {
   //   await AuthApi(_dio).verify(verifyOtp);
   // }

@@ -1,11 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+<<<<<<< HEAD
 import 'package:owner_app/app/data/repository/ocr_repository.dart';
+=======
+import 'package:owner_app/app/data/repository/complaint_repository.dart';
+>>>>>>> bb1495bcaf6a0b107e08263ec709f5a86d5dc0cf
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'data/interceptor/authentication_interceptor.dart';
 import 'data/repository/auth_repository.dart';
+import 'data/repository/notification_repository.dart';
 import 'data/repository/user_repository.dart';
 import 'utils/constants.dart';
 
@@ -41,7 +46,16 @@ class AppRepository extends GetxService {
     return UserRepository(_dioClient);
   }
 
+<<<<<<< HEAD
   OcrRepository getOcrRepository() {
     return OcrRepository(_dioClient);
+=======
+  ComplaintRepository getComplaintsRepository() {
+    return ComplaintRepository(_dioClient);
+  }
+
+  NotificationRepository getNotificationRepository() {
+    return NotificationRepository(_dioClient);
+>>>>>>> bb1495bcaf6a0b107e08263ec709f5a86d5dc0cf
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:owner_app/app/utils/app_utils.dart';
 
 import '../../../../widgets/custom_buttom.dart';
 import '../../../../widgets/password_field.dart';
@@ -11,55 +12,47 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
   Widget build(BuildContext context) {
     // final controller = Get.find<ChangePasswordController>();
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                Text(
-                  'Reset Password',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      appBar: AppBar(title: Text('Change Password')),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Obx(
+                () => PasswordField(
+                  'Current Password',
+                  controller: controller.passwordController,
+                  errorMessage: controller.passwordError.value,
                 ),
-                SizedBox(
-                  height: 20,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Obx(
+                () => PasswordField(
+                  'New Password',
+                  controller: controller.newpasswordController,
+                  errorMessage: controller.newpasswordError.value,
                 ),
-                Obx(
-                  () => PasswordField(
-                    'Curent password',
-                    controller: controller.passwordController,
-                    errorMessage: controller.passwordError.value,
-                  ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Obx(
+                () => PasswordField(
+                  'Confirm New Password',
+                  controller: controller.confirmPasswordController,
+                  errorMessage: controller.confirmPasswordError.value,
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Obx(
-                  () => PasswordField(
-                    'New password',
-                    controller: controller.newpasswordController,
-                    errorMessage: controller.newpasswordError.value,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Obx(
-                  () => PasswordField(
-                    'Confirm new password',
-                    controller: controller.confirmPasswordController,
-                    errorMessage: controller.confirmPasswordError.value,
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                CustomButton('Update password', () {
-                  controller.changePassword();
-                  // controller.clearText();
-                })
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              CustomButton('Change Passowrd', () {
+                overlayLoading(controller.changePassword);
+                // controller.clearText();
+              })
+            ],
           ),
         ),
       ),
