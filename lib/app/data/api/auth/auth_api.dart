@@ -19,7 +19,7 @@ abstract class AuthApi {
   @POST("/auth/register/")
   Future<LoginResponse> register(@Body() RegisterRequest registerRequest);
 
-  @POST("/api/notifications/devices/")
+  @POST("/api/notifications/notification/")
   Future<void> registerDevice(
       @Body() RegisterDeviceRequest registerDeviceRequest);
 

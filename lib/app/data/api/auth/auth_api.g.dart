@@ -58,7 +58,7 @@ class _AuthApi implements AuthApi {
     _data.addAll(registerDeviceRequest.toJson());
     await _dio.fetch<void>(_setStreamType<void>(
         Options(method: 'POST', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/api/notifications/devices/',
+            .compose(_dio.options, '/api/notifications/notification/',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
