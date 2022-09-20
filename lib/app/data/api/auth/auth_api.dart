@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:owner_app/app/data/models/auth/change_password_request.dart';
 import 'package:owner_app/app/data/models/auth/register_request.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -21,6 +22,10 @@ abstract class AuthApi {
   @POST("/api/notifications/devices/")
   Future<void> registerDevice(
       @Body() RegisterDeviceRequest registerDeviceRequest);
+
+  @POST("/auth/password/change/")
+  Future<void> changePassword(
+      @Body() ChangePasswordRequest changePasswordRequest);
 
   // @POST("users/verify/")
   // // Future<void> verify(@Body() VerifyOtp verifyOtp);
