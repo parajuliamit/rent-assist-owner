@@ -16,6 +16,8 @@ import '../modules/balance_viewpage/bindings/balance_viewpage_binding.dart';
 import '../modules/balance_viewpage/views/balance_viewpage_view.dart';
 import '../modules/complaint/bindings/complaint_binding.dart';
 import '../modules/complaint/views/complaint_view.dart';
+import '../modules/complaint_detail/bindings/complaint_detail_binding.dart';
+import '../modules/complaint_detail/views/complaint_detail_view.dart';
 import '../modules/navigation/bindings/navigation_binding.dart';
 import '../modules/navigation/views/navigation_view.dart';
 import '../modules/notification/views/notification_view.dart';
@@ -110,6 +112,11 @@ class AppPages {
       name: _Paths.ADD_TENANT,
       page: () => AddTenantView(),
       binding: AddTenantBinding(),
+    ),
+    GetPage(
+      name: _Paths.COMPLAINT_DETAIL,
+      page: () => ComplaintDetailView(),
+      binding: ComplaintDetailBinding(),
     ),
   ];
 }

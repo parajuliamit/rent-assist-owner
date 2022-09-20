@@ -18,6 +18,7 @@ abstract class Routes {
   static const RENT_VIEWPAGE = _Paths.RENT_VIEWPAGE;
   static const BALANCE_VIEWPAGE = _Paths.BALANCE_VIEWPAGE;
   static const ADD_TENANT = _Paths.ADD_TENANT;
+  static const COMPLAINT_DETAIL = _Paths.COMPLAINT_DETAIL;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const RENT_VIEWPAGE = '/rent-viewpage';
   static const BALANCE_VIEWPAGE = '/balance-viewpage';
   static const ADD_TENANT = '/add-tenant';
+  static const COMPLAINT_DETAIL = '/complaint-detail';
 }
