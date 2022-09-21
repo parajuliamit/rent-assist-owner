@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:owner_app/app/modules/add_tenant/views/add_tenant_view.dart';
 import 'package:owner_app/app/routes/app_pages.dart';
 import 'package:owner_app/app/widgets/custom_buttom.dart';
 import 'package:owner_app/app/widgets/error_page.dart';
