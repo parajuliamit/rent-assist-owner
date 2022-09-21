@@ -8,7 +8,6 @@ import '../../../widgets/input_field.dart';
 import '../controllers/add_tenant_controller.dart';
 
 class AddTenantView extends GetView<AddTenantController> {
-  final controller = Get.find<AddTenantController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +41,7 @@ class AddTenantView extends GetView<AddTenantController> {
               Row(
                 children: [
                   const Expanded(child: Text('Internet Price')),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Expanded(

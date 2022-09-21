@@ -16,20 +16,24 @@ import '../controllers/messages_controller.dart';
 
 class MessagesView extends GetView<MessagesController> {
   String getName({required int sender, required int receiver}) {
-    print(sender);
-    print(receiver);
     if (sender == Get.find<AppController>().profile?.id) {
-      return Get.find<TenantListController>()
-              .tenants
-              .firstWhereOrNull((element) => element.tenant == receiver)
-              ?.firstName ??
-          '';
+      var tenant = Get.find<TenantListController>()
+          .tenants
+          .firstWhereOrNull((element) => element.tenant == receiver);
+      return "${tenant?.firstName} ${tenant?.lastName}";
     } else {
-      return Get.find<TenantListController>()
-              .tenants
-              .firstWhereOrNull((element) => element.tenant == sender)
-              ?.firstName ??
-          '';
+      var tenant = Get.find<TenantListController>()
+          .tenants
+          .firstWhereOrNull((element) => element.tenant == sender);
+      return "${tenant?.firstName} ${tenant?.lastName}";
+    }
+  }
+
+  String getTenantId({required int sender, required int receiver}) {
+    if (sender == Get.find<AppController>().profile?.id) {
+      return receiver.toString();
+    } else {
+      return sender.toString();
     }
   }
 
@@ -81,7 +85,22 @@ class MessagesView extends GetView<MessagesController> {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    Get.toNamed(Routes.CHAT);
+                                    Get.toNamed(Routes.CHAT, parameters: {
+                                      "name": getName(
+                                          sender:
+                                              controller.chat[index].sender ??
+                                                  0,
+                                          receiver:
+                                              controller.chat[index].receiver ??
+                                                  0),
+                                      "tenantId": getTenantId(
+                                          sender:
+                                              controller.chat[index].sender ??
+                                                  0,
+                                          receiver:
+                                              controller.chat[index].receiver ??
+                                                  0),
+                                    });
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -140,6 +159,9 @@ class MessagesView extends GetView<MessagesController> {
                                                             true
                                                         ? FontWeight.w500
                                                         : FontWeight.bold),
+                                              ),
+                                              const SizedBox(
+                                                height: 2,
                                               ),
                                               Text(
                                                 getMessage(
