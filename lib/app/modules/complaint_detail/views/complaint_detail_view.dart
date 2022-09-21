@@ -31,7 +31,7 @@ class ComplaintDetailView extends GetView<ComplaintDetailController> {
           title: const Text("Complaint Detail"),
         ),
         body: Obx(() => controller.isLoading.isTrue
-            ? Loading()
+            ? const Loading()
             : SingleChildScrollView(
                 child: Padding(
                   padding:
