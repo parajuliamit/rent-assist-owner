@@ -49,7 +49,7 @@ class ComplaintView extends GetView<ComplaintController> {
                             margin: const EdgeInsets.all(10),
                             child: ListTile(
                               leading:
-                                  controller.complaints[index].isSolved == false
+                                  controller.complaints[index].isSolved == true
                                       ? const Icon(
                                           Icons.check_circle,
                                           size: 30,

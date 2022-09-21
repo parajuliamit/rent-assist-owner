@@ -65,6 +65,31 @@ class _UserApi implements UserApi {
   }
 
   @override
+  Future<void> editComplaint(
+    id,
+    editComplaintRequest,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(editComplaintRequest.toJson());
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/complaints/${id}/',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
+  }
+
+  @override
   Future<NotificationResponse> getNotifications() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

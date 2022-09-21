@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:owner_app/app/data/models/complaints/edit_complaint_request.dart';
 import 'package:owner_app/app/data/models/user/tenant.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -17,6 +18,10 @@ abstract class UserApi {
 
   @GET("/api/complaints/")
   Future<ComplaintsResponse> getComplaints();
+
+  @PATCH("/api/complaints/{id}/")
+  Future<void> editComplaint(
+      @Path("id") String id, @Body() EditComplaintRequest editComplaintRequest);
 
   @GET("/api/notifications/notification/")
   Future<NotificationResponse> getNotifications();
