@@ -86,34 +86,38 @@ class _InsertImageContainerState extends State<InsertImageContainer> {
   @override
   Widget build(BuildContext context) {
     return _image == null
-        ? GestureDetector(
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.5,
-              height: MediaQuery.of(context).size.width * 0.5,
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: kGreyColor.withOpacity(0.5),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.add,
-                    size: 40,
+        ? Row(
+            children: [
+              GestureDetector(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.width * 0.5,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: kGreyColor.withOpacity(0.5),
                   ),
-                  SizedBox(
-                    height: 5,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.add,
+                        size: 40,
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'Add Image',
+                      )
+                    ],
                   ),
-                  Text(
-                    'Add Image',
-                  )
-                ],
+                ),
+                onTap: () async {
+                  await selectImage(context);
+                },
               ),
-            ),
-            onTap: () async {
-              await selectImage(context);
-            },
+            ],
           )
         : Row(
             children: [

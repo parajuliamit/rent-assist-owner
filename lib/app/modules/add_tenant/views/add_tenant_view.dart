@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:owner_app/app/modules/add_tenant/views/widgets/add_image_container.dart';
+import 'package:owner_app/app/routes/app_pages.dart';
 import 'package:owner_app/app/utils/app_utils.dart';
 import 'package:owner_app/app/widgets/custom_buttom.dart';
 
@@ -135,7 +136,7 @@ class AddTenantView extends GetView<AddTenantController> {
                     ),
                     Expanded(
                       child: Obx(() => InputField(
-                            'Nagarpalika Fohor Rate',
+                            'Nagarpalika Waste Cost',
                             controller:
                                 controller.nagarpalikaFohorRateController,
                             inputType: TextInputType.number,
@@ -147,11 +148,14 @@ class AddTenantView extends GetView<AddTenantController> {
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
-                Text(
-                  'Room Image',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Agreement Image(If Any)',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -160,9 +164,10 @@ class AddTenantView extends GetView<AddTenantController> {
                 const SizedBox(
                   height: 30,
                 ),
-                CustomButton('Save Agreement', () {
-                  FocusScope.of(context).unfocus();
-                  overlayLoading(controller.saveAgreement);
+                CustomButton('Generate QR', () {
+                  // FocusScope.of(context).unfocus();
+                  // overlayLoading(controller.saveAgreement);
+                  Get.toNamed(Routes.QR_PAGE);
                 })
               ],
             ),
