@@ -29,6 +29,7 @@ class ChatController extends GetxController {
   final isError = false.obs;
   String errorMessage = '';
   late Timer timer;
+  bool isLoaded = false;
 
   late final TextEditingController messageController;
 
@@ -71,7 +72,7 @@ class ChatController extends GetxController {
   }
 
   Future<void> loadMessage() async {
-    if (formattedMessage.isEmpty) isMessageLoading(true);
+    if (!isLoaded) isMessageLoading(true);
     isError(false);
 
     try {
@@ -81,7 +82,8 @@ class ChatController extends GetxController {
             Get.find<AppController>().profile?.id == message.sender));
       }
       formattedMessage = formattedMessage.reversed.toList();
-      if (formattedMessage.isNotEmpty) update();
+      isLoaded = true;
+      if (isLoaded) update();
     } catch (e) {
       isError(true);
       if (e is DioError) {

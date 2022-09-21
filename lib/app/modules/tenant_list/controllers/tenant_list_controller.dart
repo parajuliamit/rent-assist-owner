@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:owner_app/app/app_repository.dart';
 import 'package:owner_app/app/data/exception/server_exception.dart';
 import 'package:owner_app/app/data/models/user/tenant.dart';
+import 'package:owner_app/app/modules/messages/controllers/messages_controller.dart';
 
 class TenantListController extends GetxController {
   List<Tenant> tenants = [];
@@ -23,6 +24,7 @@ class TenantListController extends GetxController {
     isError(false);
     try {
       tenants = await userRepo.getTenants();
+      Get.find<MessagesController>().getChat();
     } catch (e) {
       isError(true);
       if (e is DioError) {

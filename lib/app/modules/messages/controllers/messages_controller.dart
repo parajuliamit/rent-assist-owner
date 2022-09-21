@@ -20,7 +20,7 @@ class MessagesController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getChat();
+    // getChat();
   }
 
   Future<void> getChat() async {
