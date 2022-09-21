@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
+import 'package:owner_app/app/data/models/user/add_tenant_response.dart';
 
 class QrPageController extends GetxController {
-  //TODO: Implement QrPageController
+  late final AddTenantResponse addTenantResponse;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    addTenantResponse = Get.arguments;
   }
 
   @override
@@ -16,5 +17,4 @@ class QrPageController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

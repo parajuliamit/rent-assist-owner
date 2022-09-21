@@ -21,15 +21,15 @@ class QrPageView extends GetView<QrPageController> {
             const Align(
               alignment: Alignment.center,
               child: Text(
-                'Scan this code from Tenant App:',
+                'Scan this QR from Tenant App:',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             QrImage(
-              data: 'qr',
+              data: '${controller.addTenantResponse.id}',
             ),
           ],
         ),

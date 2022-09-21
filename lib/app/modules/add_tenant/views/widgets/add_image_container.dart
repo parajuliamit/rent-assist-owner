@@ -34,7 +34,7 @@ class _InsertImageContainerState extends State<InsertImageContainer> {
       setState(() {
         this._image = imagePermanent;
       });
-      // Get.find<AddTenantController>().image = imagePermanent;
+      Get.find<AddTenantController>().image = imagePermanent;
     } on PlatformException catch (e) {
       print('failed to pick image $e');
     }
