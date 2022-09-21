@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:owner_app/app/data/repository/chat_repository.dart';
 import 'package:owner_app/app/data/repository/ocr_repository.dart';
 import 'package:owner_app/app/data/repository/complaint_repository.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -53,5 +54,9 @@ class AppRepository extends GetxService {
 
   NotificationRepository getNotificationRepository() {
     return NotificationRepository(_dioClient);
+  }
+
+  ChatRepository getChatRepository() {
+    return ChatRepository(_dioClient);
   }
 }
