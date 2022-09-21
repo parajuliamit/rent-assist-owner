@@ -139,18 +139,30 @@ class ComplaintDetailView extends GetView<ComplaintDetailController> {
                                       ),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                            MainAxisAlignment.end,
                                         children: [
                                           TextButton(
                                             onPressed: () {},
-                                            child: Text('Send'),
+                                            child: Text(
+                                              'Send',
+                                              style: TextStyle(
+                                                  color: kPrimaryColor,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
+                                            ),
                                           ),
                                           SizedBox(
                                             width: 5,
                                           ),
                                           TextButton(
                                             onPressed: () {},
-                                            child: Text('Cancel'),
+                                            child: Text(
+                                              'Cancel',
+                                              style: TextStyle(
+                                                  color: kPrimaryColor,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -164,7 +176,60 @@ class ComplaintDetailView extends GetView<ComplaintDetailController> {
                     SizedBox(
                       width: 5,
                     ),
-                    Expanded(child: CustomButton('Mark as solved', () {}))
+                    Expanded(
+                        child: CustomButton(
+                      'Mark as solved',
+                      () async {
+                        await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Write your remarks'),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    RemarksInput(
+                                      'Remarks',
+                                      maxlines: 4,
+                                      textInputAction: TextInputAction.done,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Send',
+                                            style: TextStyle(
+                                                color: kPrimaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                                color: kPrimaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                      },
+                    ))
                   ],
                 ),
                 const SizedBox(height: 20),
