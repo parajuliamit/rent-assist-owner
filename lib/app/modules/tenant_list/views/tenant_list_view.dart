@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 import 'package:get/get.dart';
 import 'package:owner_app/app/routes/app_pages.dart';
@@ -13,15 +12,6 @@ import '../../home/views/widgets/hompage_button.dart';
 import '../controllers/tenant_list_controller.dart';
 
 class TenantListView extends GetView<TenantListController> {
-  _makingPhoneCall() async {
-    var url = Uri.parse("tel:9776765434");
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,78 +56,77 @@ class TenantListView extends GetView<TenantListController> {
                       : ListView.builder(
                           itemCount: controller.tenants.length,
                           itemBuilder: (context, index) {
-                            return Card(
-                              margin: const EdgeInsets.all(10),
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    color: kWhiteColor,
-                                    borderRadius: BorderRadius.circular(12),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color:
-                                              kPrimaryColor.withOpacity(0.25),
-                                          spreadRadius: 5,
-                                          offset: const Offset(0, 3),
-                                          blurRadius: 10)
-                                    ]),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const CircleAvatar(
-                                          backgroundColor: kGreyColor,
-                                          radius: 25,
-                                          child: Icon(Icons.person),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          '${controller.tenants[index].firstName} ${controller.tenants[index].lastName}',
-                                          style: const TextStyle(
-                                              // color: kWhiteColor,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ],
+                            return Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  15, index == 0 ? 16 : 8, 15, 5),
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: kWhiteColor,
+                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: kPrimaryColor.withOpacity(0.25),
+                                        spreadRadius: 5,
+                                        offset: const Offset(0, 3),
+                                        blurRadius: 10)
+                                  ]),
+                              child: Row(
+                                children: [
+                                  const CircleAvatar(
+                                    backgroundColor: kGreyColor,
+                                    radius: 25,
+                                    child: Icon(Icons.person),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${controller.tenants[index].firstName} ${controller.tenants[index].lastName}',
+                                      style: const TextStyle(
+                                          // color: kWhiteColor,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                          child: HomePageButton(
-                                              text: 'View Details',
-                                              textColor: kWhiteColor,
-                                              fillColor: kPrimaryColor,
-                                              onpress: () {}),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      SizedBox(
+                                        width: 40,
+                                        child: FloatingActionButton(
+                                          child: const Icon(Icons.call),
+                                          onPressed: () {
+                                            final Uri launchUri = Uri(
+                                              scheme: 'tel',
+                                              path: controller
+                                                  .tenants[index].phoneNumber,
+                                            );
+                                            launchUrl(launchUri);
+                                          },
                                         ),
-                                        Expanded(
-                                            child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            FloatingActionButton(
-                                              child: const Icon(Icons.call),
-                                              onPressed: _makingPhoneCall,
-                                            ),
-                                            FloatingActionButton(
-                                                child:
-                                                    const Icon(Icons.message),
-                                                onPressed: () {
-                                                  Get.toNamed(
-                                                      Routes.ADD_TENANT);
-                                                }),
-                                          ],
-                                        ))
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      SizedBox(
+                                        width: 40,
+                                        child: FloatingActionButton(
+                                            child: const Icon(Icons.message),
+                                            onPressed: () {
+                                              Get.toNamed(Routes.CHAT,
+                                                  parameters: {
+                                                    "name":
+                                                        '${controller.tenants[index].firstName} ${controller.tenants[index].lastName}',
+                                                    "tenantId": controller
+                                                        .tenants[index].tenant
+                                                        .toString(),
+                                                  });
+                                            }),
+                                      ),
+                                    ],
+                                  )
+                                ],
                               ),
                             );
                           },
