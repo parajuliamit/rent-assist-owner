@@ -16,6 +16,13 @@ class ComplaintView extends GetView<ComplaintController> {
     return Colors.blueGrey;
   }
 
+  IconData getIcon(String urgencyLevel) {
+    if (urgencyLevel == "H") return Icons.gpp_maybe_outlined;
+    if (urgencyLevel == "I") return Icons.error;
+    if (urgencyLevel == "L") return Icons.priority_high_outlined;
+    return Icons.warning;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,18 +46,29 @@ class ComplaintView extends GetView<ComplaintController> {
                                 arguments: controller.complaints[index]);
                           },
                           child: Card(
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: ListTile(
-                              leading: Icon(
-                                Icons.error_outline,
-                                color: getColor(
-                                  controller.complaints[index].urgencyLevel
-                                      .toString(),
-                                ),
-                              ),
+                              leading:
+                                  controller.complaints[index].isSolved == false
+                                      ? const Icon(
+                                          Icons.check_circle,
+                                          size: 30,
+                                          color: Colors.green,
+                                        )
+                                      : Icon(
+                                          getIcon(controller
+                                              .complaints[index].urgencyLevel
+                                              .toString()),
+                                          size: 30,
+                                          color: getColor(controller
+                                              .complaints[index].urgencyLevel
+                                              .toString()),
+                                        ),
                               title: Text(
-                                  controller.complaints[index].title ?? ''),
-                              trailing: Icon(Icons.chevron_right),
+                                controller.complaints[index].title ?? '',
+                                maxLines: 1,
+                              ),
+                              trailing: const Icon(Icons.chevron_right),
                               subtitle: Text(convertToAgo(DateTime.parse(
                                   controller.complaints[index].date ?? ''))),
                             ),

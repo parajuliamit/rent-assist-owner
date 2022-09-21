@@ -157,10 +157,60 @@ class HomeView extends GetView<HomeController> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return const ListTile(
-                        title: const Text('Rent'),
-                        subtitle: const Text('Paid'),
-                        trailing: const Text('Rs 5000'),
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 2),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                      color: kPrimaryColor.withOpacity(0.25),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  child: const Icon(
+                                    Icons.attach_money,
+                                    color: kPrimaryColor,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: const [
+                                      Text(
+                                        'Electricity Bill',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        'Paid on 12/12/2020',
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const Text(
+                                  '₹ 1000',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Divider()
+                        ],
                       );
                     })),
             const SizedBox(
