@@ -5,6 +5,8 @@ import '../modules/account/change_password/views/change_password_view.dart';
 import '../modules/account/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/account/edit_profile/views/edit_profile_view.dart';
 import '../modules/add_tenant/bindings/add_tenant_binding.dart';
+import '../modules/add_tenant/qr_page/bindings/qr_page_binding.dart';
+import '../modules/add_tenant/qr_page/views/qr_page_view.dart';
 import '../modules/add_tenant/views/add_tenant_view.dart';
 import '../modules/authentication/login/bindings/login_binding.dart';
 import '../modules/authentication/login/views/login_view.dart';
@@ -87,6 +89,13 @@ class AppPages {
       name: _Paths.ADD_TENANT,
       page: () => AddTenantView(),
       binding: AddTenantBinding(),
+      children: [
+        GetPage(
+          name: _Paths.QR_PAGE,
+          page: () => QrPageView(),
+          binding: QrPageBinding(),
+        ),
+      ],
     ),
     GetPage(
       name: _Paths.COMPLAINT_DETAIL,

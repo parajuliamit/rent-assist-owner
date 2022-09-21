@@ -18,6 +18,7 @@ abstract class Routes {
   static const COMPLAINT_DETAIL = _Paths.COMPLAINT_DETAIL;
   static const CHAT = _Paths.CHAT;
   static const CHOOSE_TENANT = _Paths.CHOOSE_TENANT;
+  static const QR_PAGE = _Paths.ADD_TENANT + _Paths.QR_PAGE;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const COMPLAINT_DETAIL = '/complaint-detail';
   static const CHAT = '/chat';
   static const CHOOSE_TENANT = '/choose-tenant';
+  static const QR_PAGE = '/qr-page';
 }

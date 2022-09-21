@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 import 'package:get/get.dart';
-import 'package:owner_app/app/modules/add_tenant/views/add_tenant_view.dart';
 import 'package:owner_app/app/routes/app_pages.dart';
 import 'package:owner_app/app/widgets/custom_buttom.dart';
 import 'package:owner_app/app/widgets/error_page.dart';
 import 'package:owner_app/app/widgets/loading.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/constants.dart';
 import '../../home/views/widgets/hompage_button.dart';
 import '../controllers/tenant_list_controller.dart';
 
 class TenantListView extends GetView<TenantListController> {
+  _makingPhoneCall() async {
+    var url = Uri.parse("tel:9776765434");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,12 +122,16 @@ class TenantListView extends GetView<TenantListController> {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             FloatingActionButton(
-                                                child: const Icon(Icons.call),
-                                                onPressed: () {}),
+                                              child: const Icon(Icons.call),
+                                              onPressed: _makingPhoneCall,
+                                            ),
                                             FloatingActionButton(
                                                 child:
                                                     const Icon(Icons.message),
-                                                onPressed: () {}),
+                                                onPressed: () {
+                                                  Get.toNamed(
+                                                      Routes.ADD_TENANT);
+                                                }),
                                           ],
                                         ))
                                       ],
