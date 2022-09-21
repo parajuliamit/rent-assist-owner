@@ -26,7 +26,7 @@ class AddTenantView extends GetView<AddTenantController> {
                   children: [
                     const Expanded(
                         child: Text(
-                      'Rent',
+                      'Monthly Rent',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     )),
@@ -55,17 +55,17 @@ class AddTenantView extends GetView<AddTenantController> {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     )),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Expanded(
-                      child: Obx(() => InputField(
-                            'Internet Price',
-                            controller: controller.internetPriceController,
-                            inputType: TextInputType.number,
-                            textInputAction: TextInputAction.next,
-                            errorMessage: controller.internetPriceError.value,
-                          )),
+                      child: InputField(
+                        'Internet Price',
+                        controller: controller.internetPriceController,
+                        inputType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        // errorMessage: controller.internetPriceError.value,
+                      ),
                     ),
                   ],
                 ),
@@ -76,7 +76,7 @@ class AddTenantView extends GetView<AddTenantController> {
                   children: [
                     const Expanded(
                         child: Text(
-                      'Water Usage Price',
+                      'Water Price (per month)',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     )),
@@ -84,13 +84,13 @@ class AddTenantView extends GetView<AddTenantController> {
                       width: 5,
                     ),
                     Expanded(
-                      child: Obx(() => InputField(
-                            'Water Usage Price',
-                            controller: controller.waterUsagePriceController,
-                            inputType: TextInputType.number,
-                            textInputAction: TextInputAction.next,
-                            errorMessage: controller.waterUsagePriceError.value,
-                          )),
+                      child: InputField(
+                        'Water Price',
+                        controller: controller.waterUsagePriceController,
+                        inputType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        // errorMessage: controller.waterUsagePriceError.value,
+                      ),
                     ),
                   ],
                 ),
@@ -101,7 +101,7 @@ class AddTenantView extends GetView<AddTenantController> {
                   children: [
                     const Expanded(
                         child: Text(
-                      'Electricity Rate',
+                      'Electricity Rate (per unit)',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     )),
@@ -126,7 +126,7 @@ class AddTenantView extends GetView<AddTenantController> {
                   children: [
                     const Expanded(
                         child: Text(
-                      'Nagarpalika Waste Cost',
+                      'Others (Waste etc.)',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     )),
@@ -134,39 +134,38 @@ class AddTenantView extends GetView<AddTenantController> {
                       width: 5,
                     ),
                     Expanded(
-                      child: Obx(() => InputField(
-                            'Nagarpalika Waste Cost',
-                            controller:
-                                controller.nagarpalikaFohorRateController,
-                            inputType: TextInputType.number,
-                            textInputAction: TextInputAction.next,
-                            errorMessage:
-                                controller.nagarpalikaFohorRateError.value,
-                          )),
+                      child: InputField(
+                        'Others',
+                        controller: controller.nagarpalikaFohorRateController,
+                        inputType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        // errorMessage:
+                        //     controller.nagarpalikaFohorRateError.value,
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Agreement Image(If Any)',
+                    'Agreement Image (If Any)',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                InsertImageContainer(),
+                const InsertImageContainer(),
                 const SizedBox(
                   height: 30,
                 ),
                 CustomButton('Generate QR', () {
-                  // FocusScope.of(context).unfocus();
-                  // overlayLoading(controller.saveAgreement);
-                  Get.toNamed(Routes.QR_PAGE);
+                  FocusScope.of(context).unfocus();
+                  overlayLoading(controller.saveAgreement);
+                  // Get.toNamed(Routes.QR_PAGE);
                 })
               ],
             ),

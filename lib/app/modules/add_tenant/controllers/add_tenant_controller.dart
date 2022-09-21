@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:owner_app/app/app_repository.dart';
+import 'package:owner_app/app/data/models/user/add_tenant_response.dart';
+import 'package:owner_app/app/routes/app_pages.dart';
 
 import '../../../data/exception/server_exception.dart';
 import '../../../utils/app_utils.dart';
@@ -12,11 +17,15 @@ class AddTenantController extends GetxController {
   late final TextEditingController electricityRateController;
   late final TextEditingController nagarpalikaFohorRateController;
 
+  final userRepo = Get.find<AppRepository>().getUserRepository();
+
   final rentError = ''.obs;
-  final internetPriceError = ''.obs;
-  final waterUsagePriceError = ''.obs;
+  // final internetPriceError = ''.obs;
+  // final waterUsagePriceError = ''.obs;
   final electricityRateError = ''.obs;
-  final nagarpalikaFohorRateError = ''.obs;
+  // final nagarpalikaFohorRateError = ''.obs;
+
+  File? image;
 
   @override
   void onInit() {
@@ -31,19 +40,19 @@ class AddTenantController extends GetxController {
       rentError.value = "";
     });
 
-    internetPriceController.addListener(() {
-      internetPriceError.value = "";
-    });
-    waterUsagePriceController.addListener(() {
-      waterUsagePriceError.value = "";
-    });
+    // internetPriceController.addListener(() {
+    //   internetPriceError.value = "";
+    // });
+    // waterUsagePriceController.addListener(() {
+    //   waterUsagePriceError.value = "";
+    // });
 
     electricityRateController.addListener(() {
       electricityRateError.value = "";
     });
-    nagarpalikaFohorRateController.addListener(() {
-      nagarpalikaFohorRateError.value = "";
-    });
+    // nagarpalikaFohorRateController.addListener(() {
+    //   nagarpalikaFohorRateError.value = "";
+    // });
   }
 
   Future<void> saveAgreement() async {
@@ -55,12 +64,21 @@ class AddTenantController extends GetxController {
     if (validateInput(rent, internetPrice, waterPrice, electricityRate,
         nagarpalikaFohorRate)) {
       try {
+        var response = await userRepo.addTenant(
+            AddTenantResponse(
+                price: int.parse(rent),
+                electricityRate: int.parse(electricityRate),
+                waterUsagePrice: int.tryParse(waterPrice),
+                internetPrice: int.tryParse(internetPrice),
+                nagarpalikaFohrPrice: int.tryParse(nagarpalikaFohorRate),
+                owner: 1),
+            image);
+        Get.offNamed(Routes.QR_PAGE, arguments: response);
         showSnackbar('Agreement Uploaded Successfully');
       } catch (e) {
+        showSnackbar(e.toString(), isError: true);
         if (e is DioError) {
           handleError(e);
-        } else {
-          showSnackbar(e.toString(), isError: true);
         }
       }
     }
@@ -77,6 +95,12 @@ class AddTenantController extends GetxController {
       if (error.containsKey('non_field_errors')) {
         showSnackbar(error['non_field_errors']![0], isError: true);
       }
+      if (error.containsKey('price')) {
+        rentError(error['price']![0]);
+      }
+      if (error.containsKey('electricity')) {
+        electricityRateError(error['electricity']![0]);
+      }
     } else {
       showSnackbar(ServerError.withError(error: e).getErrorMessage(),
           isError: true);
@@ -86,28 +110,28 @@ class AddTenantController extends GetxController {
   bool validateInput(String rent, String internetPrice, String waterPrice,
       String electricityRate, String nagarpalikaFohorRate) {
     bool isValid = true;
-    if (rent.length < 1) {
-      rentError('Rent cant be less than 1');
+    if (rent.isEmpty) {
+      rentError('*Required');
       isValid = false;
     }
-    if (internetPrice.length < 1) {
-      internetPriceError('Internet price cant be less than 1');
-      isValid = false;
-    }
-    if (waterPrice.length < 1) {
-      waterUsagePriceError('Water price cant be less than 1');
+    // if (internetPrice.length < 1) {
+    //   internetPriceError('Internet price cant be less than 1');
+    //   isValid = false;
+    // }
+    // if (waterPrice.length < 1) {
+    //   waterUsagePriceError('Water price cant be less than 1');
+    //   isValid = false;
+    // }
+
+    if (electricityRate.isEmpty) {
+      electricityRateError('*Required');
       isValid = false;
     }
 
-    if (electricityRate.length < 1) {
-      electricityRateError('Electricity rate cant be less than 1');
-      isValid = false;
-    }
-
-    if (nagarpalikaFohorRate.length < 1) {
-      nagarpalikaFohorRateError('Nagarpalika fohor rate cant be less than 1');
-      isValid = false;
-    }
+    // if (nagarpalikaFohorRate.length < 1) {
+    //   nagarpalikaFohorRateError('Nagarpalika fohor rate cant be less than 1');
+    //   isValid = false;
+    // }
     return isValid;
   }
 
