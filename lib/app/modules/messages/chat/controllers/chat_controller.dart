@@ -77,6 +77,7 @@ class ChatController extends GetxController {
 
     try {
       messages = await chatRepo.getMessages(tenantId);
+      formattedMessage.clear();
       for (var message in messages) {
         formattedMessage.add(FormattedMessage(message.message ?? '',
             Get.find<AppController>().profile?.id == message.sender));
