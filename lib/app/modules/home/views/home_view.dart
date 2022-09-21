@@ -122,7 +122,7 @@ class HomeView extends GetView<HomeController> {
             const SizedBox(
               height: 20,
             ),
-            const ScanBattiContainer(),
+            ScanMeterContainer(),
             const SizedBox(
               height: 10,
             ),

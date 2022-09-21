@@ -17,6 +17,7 @@ abstract class Routes {
   static const ADD_TENANT = _Paths.ADD_TENANT;
   static const COMPLAINT_DETAIL = _Paths.COMPLAINT_DETAIL;
   static const CHAT = _Paths.CHAT;
+  static const CHOOSE_TENANT = _Paths.CHOOSE_TENANT;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const ADD_TENANT = '/add-tenant';
   static const COMPLAINT_DETAIL = '/complaint-detail';
   static const CHAT = '/chat';
+  static const CHOOSE_TENANT = '/choose-tenant';
 }

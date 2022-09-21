@@ -34,14 +34,6 @@ class UserInfo extends StatelessWidget {
               ),
             ],
           ),
-          IconButton(
-            onPressed: () {
-              Get.toNamed(Routes.NOTIFICATION);
-            },
-            icon: const Icon(Icons.notifications_on_outlined),
-            color: kDarkGreen,
-            iconSize: 25,
-          )
         ],
       ),
     );

@@ -12,6 +12,8 @@ import '../modules/authentication/register/bindings/register_binding.dart';
 import '../modules/authentication/register/views/register_view.dart';
 import '../modules/balance_viewpage/bindings/balance_viewpage_binding.dart';
 import '../modules/balance_viewpage/views/balance_viewpage_view.dart';
+import '../modules/choose_tenant/bindings/choose_tenant_binding.dart';
+import '../modules/choose_tenant/views/choose_tenant_view.dart';
 import '../modules/complaint/views/complaint_view.dart';
 import '../modules/complaint_detail/bindings/complaint_detail_binding.dart';
 import '../modules/complaint_detail/views/complaint_detail_view.dart';
@@ -95,6 +97,11 @@ class AppPages {
       name: _Paths.CHAT,
       page: () => ChatView(),
       binding: ChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHOOSE_TENANT,
+      page: () => ChooseTenantView(),
+      binding: ChooseTenantBinding(),
     ),
   ];
 }
