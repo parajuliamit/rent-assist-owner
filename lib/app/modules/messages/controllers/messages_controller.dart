@@ -13,6 +13,8 @@ class MessagesController extends GetxController {
 
   String errorMessage = '';
 
+  final unseenCount = 0.obs;
+
   List<Chat> chat = [];
 
   @override
@@ -26,6 +28,7 @@ class MessagesController extends GetxController {
     isError(false);
     try {
       chat = await chatRepo.getChat();
+      unseenCount(chat.where((element) => element.isRead == false).length);
     } catch (e) {
       isError(true);
       if (e is DioError) {

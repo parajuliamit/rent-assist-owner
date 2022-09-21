@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:owner_app/app/modules/messages/controllers/messages_controller.dart';
 import 'package:owner_app/app/utils/constants.dart';
 
 import '../controllers/navigation_controller.dart';
@@ -18,8 +19,48 @@ class NavigationView extends GetView<NavigationController> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BottomBarIcon(icon: Icons.home, controller: controller, index: 0),
-              BottomBarIcon(
-                  icon: Icons.message, controller: controller, index: 1),
+              Obx(() => BottomBarIcon(
+                    icon: Icons.message_outlined,
+                    controller: controller,
+                    index: 1,
+                    icon2: Get.find<MessagesController>().unseenCount.value == 0
+                        ? null
+                        : Stack(
+                            children: [
+                              Positioned(
+                                top: 4,
+                                left: 2,
+                                child: Icon(
+                                  Icons.message_outlined,
+                                  color: controller.selectedIndex.value == 1
+                                      ? kPrimaryColor
+                                      : Colors.grey,
+                                ),
+                              ),
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: Container(
+                                  padding: const EdgeInsets.all(3),
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Text(
+                                    Get.find<MessagesController>()
+                                        .unseenCount
+                                        .value
+                                        .toString(),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                  )),
               BottomBarIcon(
                   icon: Icons.attach_money_outlined,
                   controller: controller,
@@ -59,12 +100,14 @@ class BottomBarIcon extends StatelessWidget {
   final IconData icon;
   final NavigationController controller;
   final int index;
+  final Widget? icon2;
 
   const BottomBarIcon(
       {Key? key,
       required this.icon,
       required this.controller,
-      required this.index})
+      required this.index,
+      this.icon2})
       : super(key: key);
 
   @override
@@ -73,12 +116,13 @@ class BottomBarIcon extends StatelessWidget {
       onPressed: () {
         controller.changeIndex(index);
       },
-      icon: Icon(
-        icon,
-        color: controller.selectedIndex.value == index
-            ? kPrimaryColor
-            : Colors.grey,
-      ),
+      icon: icon2 ??
+          Icon(
+            icon,
+            color: controller.selectedIndex.value == index
+                ? kPrimaryColor
+                : Colors.grey,
+          ),
     );
   }
 }
