@@ -13,6 +13,8 @@ class ComplaintController extends GetxController {
 
   List<Complaint> complaints = [];
 
+  final pendingComplaints = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -25,6 +27,12 @@ class ComplaintController extends GetxController {
 
     try {
       complaints = await appRepo.getComplaintsRepository().getComplaints();
+      pendingComplaints(0);
+      for (var complaint in complaints) {
+        if (complaint.isSolved == false) {
+          pendingComplaints(pendingComplaints.value + 1);
+        }
+      }
     } catch (e) {
       print(e);
       isError(true);

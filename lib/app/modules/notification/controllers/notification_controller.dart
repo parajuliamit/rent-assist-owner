@@ -14,6 +14,8 @@ class NotificationController extends GetxController {
 
   List<Notification> notifications = [];
 
+  final unreadCount = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -27,6 +29,12 @@ class NotificationController extends GetxController {
     try {
       notifications =
           await appRepo.getNotificationRepository().getNotifications();
+      unreadCount(0);
+      for (var notification in notifications) {
+        if (notification.isRead == false) {
+          unreadCount(unreadCount.value + 1);
+        }
+      }
     } catch (e) {
       print(e);
       isError(true);

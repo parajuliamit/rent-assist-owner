@@ -12,7 +12,6 @@ import '../modules/authentication/register/bindings/register_binding.dart';
 import '../modules/authentication/register/views/register_view.dart';
 import '../modules/balance_viewpage/bindings/balance_viewpage_binding.dart';
 import '../modules/balance_viewpage/views/balance_viewpage_view.dart';
-import '../modules/complaint/bindings/complaint_binding.dart';
 import '../modules/complaint/views/complaint_view.dart';
 import '../modules/complaint_detail/bindings/complaint_detail_binding.dart';
 import '../modules/complaint_detail/views/complaint_detail_view.dart';
@@ -20,7 +19,6 @@ import '../modules/messages/chat/bindings/chat_binding.dart';
 import '../modules/messages/chat/views/chat_view.dart';
 import '../modules/navigation/bindings/navigation_binding.dart';
 import '../modules/navigation/views/navigation_view.dart';
-import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
 import '../modules/rent_viewpage/bindings/rent_viewpage_binding.dart';
 import '../modules/rent_viewpage/views/rent_viewpage_view.dart';
@@ -58,12 +56,10 @@ class AppPages {
     GetPage(
       name: _Paths.NOTIFICATION,
       page: () => NotificationView(),
-      binding: NotificationBinding(),
     ),
     GetPage(
       name: _Paths.COMPLAINT,
       page: () => ComplaintView(),
-      binding: ComplaintBinding(),
     ),
     GetPage(
       name: _Paths.CHANGE_PASSWORD,
@@ -93,8 +89,9 @@ class AppPages {
     GetPage(
       name: _Paths.COMPLAINT_DETAIL,
       page: () => ComplaintDetailView(),
-      binding: ComplaintDetailBinding(),),
-GetPage(
+      binding: ComplaintDetailBinding(),
+    ),
+    GetPage(
       name: _Paths.CHAT,
       page: () => ChatView(),
       binding: ChatBinding(),

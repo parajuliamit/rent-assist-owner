@@ -9,13 +9,13 @@ class ComplaintsResponse {
   ComplaintsResponse.fromJson(Map<String, dynamic> json) {
     if (json["success"] is bool) this.success = json["success"];
     if (json["message"] is String) this.message = json["message"];
-    if (json["data"] is List)
-      this.complaints = json["data"] == null
-          ? []
-          : (json["data"] as List).map((e) => Complaint.fromJson(e)).toList();
+
+    this.complaints = json["data"] == null
+        ? []
+        : (json["data"] as List).map((e) => Complaint.fromJson(e)).toList();
     if (json["errors"] is List) this.errors = json["errors"] ?? [];
-    if (json["meta"] is Map)
-      this.meta = json["meta"] == null ? null : Meta.fromJson(json["meta"]);
+
+    this.meta = json["meta"] == null ? null : Meta.fromJson(json["meta"]);
     if (json["messgae"] is String) this.messgae = json["messgae"];
   }
 }
@@ -40,6 +40,8 @@ class Complaint {
   String? date;
   String? urgencyLevel;
   int? tenant;
+  bool? isSolved;
+  String? status;
 
   Complaint(
       {this.id,
@@ -48,7 +50,9 @@ class Complaint {
       this.description,
       this.date,
       this.urgencyLevel,
-      this.tenant});
+      this.tenant,
+      this.isSolved,
+      this.status});
 
   Complaint.fromJson(Map<String, dynamic> json) {
     if (json["id"] is int) this.id = json["id"];
@@ -59,6 +63,8 @@ class Complaint {
     if (json["urgency_level"] is String)
       this.urgencyLevel = json["urgency_level"];
     if (json["tenant"] is int) this.tenant = json["tenant"];
+    if (json["is_solved"] is bool) this.isSolved = json["is_solved"];
+    if (json["status"] is String) this.status = json["status"];
   }
 
   Map<String, dynamic> toJson() {
@@ -70,6 +76,8 @@ class Complaint {
     data["date"] = this.date;
     data["urgency_level"] = this.urgencyLevel;
     data["tenant"] = this.tenant;
+    data["is_solved"] = this.isSolved;
+    data["status"] = this.status;
     return data;
   }
 }

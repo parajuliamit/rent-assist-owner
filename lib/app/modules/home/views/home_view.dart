@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:owner_app/app/modules/complaint/controllers/complaint_controller.dart';
 import 'package:owner_app/app/modules/home/views/widgets/scan_meter_container.dart';
 import 'package:owner_app/app/modules/home/views/widgets/icon_container.dart';
+import 'package:owner_app/app/modules/notification/controllers/notification_controller.dart';
 import 'package:owner_app/app/routes/app_pages.dart';
 
 import '../../../utils/constants.dart';
@@ -42,13 +44,16 @@ class HomeView extends GetView<HomeController> {
                     width: 15,
                   ),
                   Expanded(
-                    child: ComplaintContainer(
-                      title: '4',
-                      subtitle: 'Complaints',
-                      onTap: () {
-                        Get.toNamed(Routes.COMPLAINT);
-                      },
-                    ),
+                    child: Obx(() => ComplaintContainer(
+                          title: Get.find<ComplaintController>()
+                              .pendingComplaints
+                              .value
+                              .toString(),
+                          subtitle: 'Complaints',
+                          onTap: () {
+                            Get.toNamed(Routes.COMPLAINT);
+                          },
+                        )),
                   ),
                 ],
               ),
@@ -61,12 +66,43 @@ class HomeView extends GetView<HomeController> {
               child: Row(
                 children: [
                   Expanded(
-                    child: IconContainer(
-                      onTap: () {
-                        Get.toNamed(Routes.NOTIFICATION);
-                      },
-                      title: 'Notifications',
-                      icon: Icons.notifications_active_outlined,
+                    child: Obx(
+                      () => IconContainer(
+                          onTap: () {
+                            Get.toNamed(Routes.NOTIFICATION);
+                          },
+                          title: 'Notifications',
+                          icon: Icons.notifications_active_outlined,
+                          icon2: Stack(
+                            children: [
+                              const Icon(
+                                Icons.notifications_active_outlined,
+                                color: kPrimaryColor,
+                                size: 40,
+                              ),
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Text(
+                                    Get.find<NotificationController>()
+                                        .unreadCount
+                                        .value
+                                        .toString(),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
                     ),
                   ),
                   const SizedBox(

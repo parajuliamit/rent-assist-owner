@@ -34,8 +34,17 @@ class Notification {
   String? title;
   String? type;
   int? tenant;
+  String? deepLink;
+  bool? isRead;
 
-  Notification({this.id, this.created, this.title, this.type, this.tenant});
+  Notification(
+      {this.id,
+      this.created,
+      this.title,
+      this.type,
+      this.tenant,
+      this.deepLink,
+      this.isRead});
 
   Notification.fromJson(Map<String, dynamic> json) {
     if (json["id"] is int) this.id = json["id"];
@@ -43,15 +52,7 @@ class Notification {
     if (json["title"] is String) this.title = json["title"];
     if (json["type"] is String) this.type = json["type"];
     if (json["tenant"] is int) this.tenant = json["tenant"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["id"] = this.id;
-    data["created"] = this.created;
-    data["title"] = this.title;
-    data["type"] = this.type;
-    data["tenant"] = this.tenant;
-    return data;
+    if (json["is_read"] is bool) this.isRead = json["is_read"];
+    if (json["deep_link"] is String) this.deepLink = json["deep_link"];
   }
 }

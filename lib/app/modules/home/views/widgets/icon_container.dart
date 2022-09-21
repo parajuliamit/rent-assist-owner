@@ -5,12 +5,17 @@ import '../../../../utils/constants.dart';
 
 class IconContainer extends StatelessWidget {
   const IconContainer(
-      {Key? key, required this.icon, required this.title, required this.onTap})
+      {Key? key,
+      required this.icon,
+      required this.title,
+      required this.onTap,
+      this.icon2})
       : super(key: key);
 
   final IconData icon;
   final String title;
   final VoidCallback onTap;
+  final Widget? icon2;
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +37,12 @@ class IconContainer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              color: kPrimaryColor,
-              size: 40,
-            ),
+            icon2 ??
+                Icon(
+                  icon,
+                  color: kPrimaryColor,
+                  size: 40,
+                ),
             const SizedBox(
               height: 2,
             ),

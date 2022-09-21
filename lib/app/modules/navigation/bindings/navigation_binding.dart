@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:owner_app/app/modules/balance_status/controllers/balance_status_controller.dart';
+import 'package:owner_app/app/modules/complaint/controllers/complaint_controller.dart';
+import 'package:owner_app/app/modules/notification/controllers/notification_controller.dart';
 import 'package:owner_app/app/modules/tenant_list/controllers/tenant_list_controller.dart';
 
 import '../../account/controllers/account_controller.dart';
@@ -28,6 +30,12 @@ class NavigationBinding extends Bindings {
     );
     Get.lazyPut<TenantListController>(
       () => TenantListController(),
+    );
+    Get.put(
+      NotificationController(),
+    );
+    Get.put(
+      ComplaintController(),
     );
   }
 }
