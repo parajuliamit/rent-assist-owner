@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:owner_app/app/utils/constants.dart';
 
 import '../../../utils/time_ago.dart';
 import '../../../widgets/error_page.dart';
@@ -12,7 +13,7 @@ class NotificationView extends GetView<NotificationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Notifications'),
+        title: const Text('Notifications'),
         centerTitle: true,
       ),
       body: Obx(
@@ -31,16 +32,37 @@ class NotificationView extends GetView<NotificationController> {
                           itemCount: controller.notifications.length,
                           itemBuilder: (context, index) {
                             return Card(
-                              margin: const EdgeInsets.all(10),
-                              child: ListTile(
-                                leading: const Icon(Icons.notifications),
-                                title: Text(
-                                    controller.notifications[index].title ??
-                                        ''),
-                                trailing: const Icon(Icons.chevron_right),
-                                subtitle: Text(convertToAgo(DateTime.parse(
-                                    controller.notifications[index].created ??
-                                        ''))),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 10),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Row(children: [
+                                  const Icon(
+                                    Icons.notifications_outlined,
+                                    color: kPrimaryColor,
+                                    size: 28,
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Text(
+                                        controller.notifications[index].title ??
+                                            '',
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    convertToAgo(DateTime.parse(controller
+                                            .notifications[index].created ??
+                                        '')),
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
+                                ]),
                               ),
                             );
                           },

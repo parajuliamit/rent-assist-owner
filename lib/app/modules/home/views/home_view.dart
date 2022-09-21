@@ -121,12 +121,15 @@ class HomeView extends GetView<HomeController> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return ListTile(
+                      return const ListTile(
                         title: const Text('Rent'),
                         subtitle: const Text('Paid'),
                         trailing: const Text('Rs 5000'),
                       );
-                    }))
+                    })),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),

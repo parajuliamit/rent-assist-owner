@@ -10,11 +10,11 @@ String convertToAgo(DateTime input) {
   } else if (diff.inHours == 1) {
     return '${diff.inHours} hour ago';
   } else if (diff.inMinutes == 1) {
-    return '${diff.inMinutes} minute ago';
+    return '${diff.inMinutes} min ago';
   } else if (diff.inMinutes > 1) {
-    return '${diff.inMinutes} minutes ago';
+    return '${diff.inMinutes} min ago';
   } else if (diff.inSeconds > 1) {
-    return '${diff.inSeconds} seconds ago';
+    return '${diff.inSeconds} sec ago';
   } else {
     return 'Just now';
   }

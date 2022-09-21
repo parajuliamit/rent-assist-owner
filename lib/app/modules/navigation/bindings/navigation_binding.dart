@@ -5,7 +5,6 @@ import 'package:owner_app/app/modules/tenant_list/controllers/tenant_list_contro
 import '../../account/controllers/account_controller.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../messages/controllers/messages_controller.dart';
-import '../../notification/controllers/notification_controller.dart';
 import '../controllers/navigation_controller.dart';
 
 class NavigationBinding extends Bindings {
