@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:owner_app/app/app_controller.dart';
 import 'package:owner_app/app/app_repository.dart';
 import 'package:owner_app/app/data/models/user/add_tenant_response.dart';
 import 'package:owner_app/app/routes/app_pages.dart';
@@ -65,14 +66,15 @@ class AddTenantController extends GetxController {
         nagarpalikaFohorRate)) {
       try {
         var response = await userRepo.addTenant(
-            AddTenantResponse(
-                price: int.parse(rent),
-                electricityRate: int.parse(electricityRate),
-                waterUsagePrice: int.tryParse(waterPrice),
-                internetPrice: int.tryParse(internetPrice),
-                nagarpalikaFohrPrice: int.tryParse(nagarpalikaFohorRate),
-                owner: 1),
-            image);
+            AddTenantRequest(
+              price: int.parse(rent),
+              electricityRate: int.parse(electricityRate),
+              waterUsagePrice: int.tryParse(waterPrice),
+              internetPrice: int.tryParse(internetPrice),
+              nagarpalikaFohrPrice: int.tryParse(nagarpalikaFohorRate),
+            ),
+            image,
+            Get.find<AppController>().profile?.id);
         Get.offNamed(Routes.QR_PAGE, arguments: response);
         showSnackbar('Agreement Uploaded Successfully');
       } catch (e) {

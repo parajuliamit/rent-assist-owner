@@ -29,7 +29,7 @@ class QrPageView extends GetView<QrPageController> {
               height: 30,
             ),
             QrImage(
-              data: '${controller.addTenantResponse.id}',
+              data: '${controller.addTenantResponse.meta?.id}',
             ),
           ],
         ),
