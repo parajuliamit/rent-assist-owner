@@ -68,11 +68,11 @@ class MyApp extends StatelessWidget {
           )),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
-      // unknownRoute: GetPage(
-      //     name: '/notfound',
-      //     page: () => ErrorPage('Page not found.', () {
-      //           Get.back();
-      //         })),
+      unknownRoute: GetPage(
+          name: '/notfound',
+          page: () => ErrorPage('Page not found.', () {
+                Get.back();
+              })),
       initialBinding: BindingsBuilder(() {
         Get.lazyPut(() => AppRepository(Dio(), storage));
         Get.put(AppController(), permanent: true);
