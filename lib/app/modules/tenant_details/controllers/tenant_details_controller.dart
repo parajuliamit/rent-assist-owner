@@ -5,6 +5,7 @@ import 'package:owner_app/app/data/exception/server_exception.dart';
 import 'package:owner_app/app/data/models/user/document_response.dart';
 import 'package:owner_app/app/data/models/user/tenant.dart';
 import 'package:owner_app/app/modules/tenant_list/controllers/tenant_list_controller.dart';
+import 'package:owner_app/app/utils/app_utils.dart';
 
 import '../../../data/models/user/agreement_response.dart';
 
@@ -62,6 +63,25 @@ class TenantDetailsController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> deleteTenant() async {
+    isLoading.value = true;
+    isError.value = false;
+    try {
+      await userRepo.deleteTenant(tenant.id!.toString());
+      Get.find<TenantListController>().getTenants();
+      Get.back();
+      showSnackbar('Tenant deleted successfully');
+    } catch (e) {
+      isError.value = true;
+      if (e is DioError) {
+        errorMessage = ServerError.withError(error: e).getErrorMessage();
+      } else {
+        errorMessage = e.toString();
+      }
+    }
+    isLoading.value = false;
   }
 
   @override

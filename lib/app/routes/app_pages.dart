@@ -19,6 +19,8 @@ import '../modules/choose_tenant/views/choose_tenant_view.dart';
 import '../modules/complaint/views/complaint_view.dart';
 import '../modules/complaint_detail/bindings/complaint_detail_binding.dart';
 import '../modules/complaint_detail/views/complaint_detail_view.dart';
+import '../modules/edit_tenant/bindings/edit_tenant_binding.dart';
+import '../modules/edit_tenant/views/edit_tenant_view.dart';
 import '../modules/messages/chat/bindings/chat_binding.dart';
 import '../modules/messages/chat/views/chat_view.dart';
 import '../modules/navigation/bindings/navigation_binding.dart';
@@ -130,6 +132,11 @@ class AppPages {
     GetPage(
       name: _Paths.TRANSACTION_HISTORY,
       page: () => TransactionHistoryView(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_TENANT,
+      page: () => EditTenantView(),
+      binding: EditTenantBinding(),
     ),
   ];
 }

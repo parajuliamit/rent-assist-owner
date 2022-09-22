@@ -25,6 +25,9 @@ abstract class UserApi {
   Future<void> editComplaint(
       @Path("id") String id, @Body() EditComplaintRequest editComplaintRequest);
 
+  @DELETE("/api/users/my-tenants/{id}")
+  Future<void> deleteTenant(@Path("id") String id);
+
   @GET("/api/notifications/notification/")
   Future<NotificationResponse> getNotifications();
 

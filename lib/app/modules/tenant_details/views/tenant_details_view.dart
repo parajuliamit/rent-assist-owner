@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:owner_app/app/routes/app_pages.dart';
 import 'package:owner_app/app/utils/constants.dart';
 
 import '../../../widgets/error_page.dart';
@@ -59,6 +60,46 @@ class TenantDetailsView extends GetView<TenantDetailsController> {
     return Scaffold(
         appBar: AppBar(
           title: Text(controller.name),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Get.offNamed(Routes.EDIT_TENANT,
+                      arguments: controller.agreement,
+                      parameters: {
+                        "tenant": ((controller.tenant.tenant) ?? 0).toString()
+                      });
+                },
+                icon: const Icon(Icons.edit)),
+            IconButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("Delete ${controller.name}"),
+                          content: Text(
+                              "Are you sure you want to delete ${controller.name}"),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Text("Cancel")),
+                            TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                  controller.deleteTenant();
+                                },
+                                child: Text("Delete")),
+                          ],
+                        );
+                      });
+                },
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                )),
+          ],
         ),
         body: Obx(() => controller.isLoading.isTrue
             ? const Loading()
