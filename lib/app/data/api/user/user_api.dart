@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:owner_app/app/data/models/complaints/edit_complaint_request.dart';
+import 'package:owner_app/app/data/models/user/agreement_response.dart';
+import 'package:owner_app/app/data/models/user/document_response.dart';
 import 'package:owner_app/app/data/models/user/tenant.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -28,4 +30,10 @@ abstract class UserApi {
 
   @GET("/api/users/my-tenants/")
   Future<List<Tenant>> getTenants();
+
+  @GET("/api/contract/agreement/")
+  Future<AgreementResponse> getAgreements();
+
+  @GET("/api/contract/documents/")
+  Future<List<DocumentResponse>> getDocuments();
 }

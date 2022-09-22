@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:owner_app/app/data/api/user/user_api.dart';
 import 'package:owner_app/app/data/models/user/add_tenant_response.dart';
+import 'package:owner_app/app/data/models/user/agreement_response.dart';
+import 'package:owner_app/app/data/models/user/document_response.dart';
 import 'package:owner_app/app/data/models/user/tenant.dart';
 
 import '../models/user/profile.dart';
@@ -35,5 +37,13 @@ class UserRepository {
     });
     var result = await _dio.post('/api/rooms/', data: formData);
     return AddTenantResponse.fromJson(result.data);
+  }
+
+  Future<List<Agreement>> getAgreements() async {
+    return (await UserApi(_dio).getAgreements()).data;
+  }
+
+  Future<List<DocumentResponse>> getDocuments() async {
+    return await UserApi(_dio).getDocuments();
   }
 }

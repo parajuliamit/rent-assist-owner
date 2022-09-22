@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:owner_app/app/utils/constants.dart';
 
+import '../../../widgets/error_page.dart';
+import '../../../widgets/loading.dart';
 import '../controllers/tenant_details_controller.dart';
 
 class TenantDetailsView extends GetView<TenantDetailsController> {
@@ -58,57 +60,92 @@ class TenantDetailsView extends GetView<TenantDetailsController> {
         appBar: AppBar(
           title: Text(controller.name),
         ),
-        body: SingleChildScrollView(
-            child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(children: [
-                  const Text("Basic Info",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: kPrimaryColor)),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 5),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: kPrimaryColor.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: kPrimaryColor)),
-                    child: Column(
-                      children: [
-                        infoRow('Name :', 'Rabin KC'),
-                        infoRow('Email :', 'rabin@gmail.com'),
-                        infoRow('Phone :', '98738383838'),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text("Agreement Details",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: kPrimaryColor)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: kPrimaryColor.withOpacity(0.1),
-                        border: Border.all(color: kPrimaryColor),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Column(
-                      children: [
-                        getRow("Monthly Rent :", "1000"),
-                        getRow("Electricy Charges (per unit) :", "78"),
-                        getRow("Water Charge (per month) :", "600"),
-                        getRow("Internet Charge :", "500"),
-                        getRow("Others(eg. Waste) :", "0"),
-                      ],
-                    ),
-                  ),
-                ]))));
+        body: Obx(() => controller.isLoading.isTrue
+            ? const Loading()
+            : controller.isError.isTrue
+                ? ErrorPage(controller.errorMessage, controller.getDetails)
+                : SingleChildScrollView(
+                    child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(children: [
+                          const Text("Basic Info",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: kPrimaryColor)),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: kPrimaryColor.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: kPrimaryColor)),
+                            child: Column(
+                              children: [
+                                infoRow('Name :',
+                                    '${controller.tenant.firstName} ${controller.tenant.lastName}'),
+                                infoRow(
+                                    'Email :', '${controller.tenant.email}'),
+                                infoRow('Phone :',
+                                    '${controller.tenant.phoneNumber}'),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Text("Agreement Details",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: kPrimaryColor)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: kPrimaryColor.withOpacity(0.1),
+                                border: Border.all(color: kPrimaryColor),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Column(
+                              children: [
+                                getRow("Monthly Rent :",
+                                    "${controller.agreement?.price}"),
+                                getRow("Electricy Charges (per unit) :",
+                                    "${controller.agreement?.electricityRate}"),
+                                getRow("Water Charge (per month) :",
+                                    "${controller.agreement?.waterUsagePrice}"),
+                                getRow("Internet Charge :",
+                                    "${controller.agreement?.internetPrice}"),
+                                getRow("Others(eg. Waste) :",
+                                    "${controller.agreement?.nagarpalikaFohrPrice}"),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          GetBuilder<TenantDetailsController>(
+                              builder: (controller) {
+                            return controller.document == null
+                                ? const SizedBox()
+                                : Column(
+                                    children: [
+                                      const Text("Documents",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                              color: kPrimaryColor)),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Image.network(
+                                          controller.document!.citizenship ??
+                                              '')
+                                    ],
+                                  );
+                          })
+                        ])))));
   }
 }
