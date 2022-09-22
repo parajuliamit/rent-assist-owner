@@ -125,6 +125,7 @@ class ChooseTenantController extends GetxController {
                 currentReading: double.tryParse(readingController.text) ?? 0,
               ),
             );
+            Get.back();
             showSnackbar('Meter configured successfully');
           } else {
             var response = await ocrRepo.calculateBatti(
@@ -133,6 +134,7 @@ class ChooseTenantController extends GetxController {
                 currentReading: double.tryParse(readingController.text) ?? 0,
               ),
             );
+            Get.back();
             showSnackbar(
                 "This month unit is: ${response.totalPayableUnitThisMonth}");
           }
