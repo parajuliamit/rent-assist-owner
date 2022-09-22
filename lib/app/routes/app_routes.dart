@@ -19,6 +19,8 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const CHOOSE_TENANT = _Paths.CHOOSE_TENANT;
   static const QR_PAGE = _Paths.ADD_TENANT + _Paths.QR_PAGE;
+  static const TENANT_DETAILS = _Paths.TENANT_DETAILS;
+  static const VIEW_IMAGE = _Paths.VIEW_IMAGE;
 }
 
 abstract class _Paths {
@@ -39,4 +41,6 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const CHOOSE_TENANT = '/choose-tenant';
   static const QR_PAGE = '/qr-page';
+  static const TENANT_DETAILS = '/tenant-details';
+  static const VIEW_IMAGE = '/view-image';
 }

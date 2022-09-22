@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../app_controller.dart';
-import '../../../../routes/app_pages.dart';
 import '../../../../utils/constants.dart';
 
 class UserInfo extends StatelessWidget {
@@ -18,10 +17,12 @@ class UserInfo extends StatelessWidget {
           Row(
             children: [
               const CircleAvatar(
+                backgroundColor: kGreyColor,
                 radius: 25,
                 child: Icon(
                   Icons.person,
                   size: 30,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(
@@ -30,7 +31,7 @@ class UserInfo extends StatelessWidget {
               Text(
                 'Welcome, ${Get.find<AppController>().profile?.firstName}',
                 style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:owner_app/app/modules/complaint_detail/views/widgets/remarks_input.dart';
+import 'package:owner_app/app/routes/app_pages.dart';
 import 'package:owner_app/app/utils/app_utils.dart';
 import 'package:owner_app/app/widgets/custom_buttom.dart';
 
@@ -116,14 +117,26 @@ class ComplaintDetailView extends GetView<ComplaintDetailController> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: Image.network(
-                          baseUrl + (controller.complaint?.image ?? ''),
-                          width: MediaQuery.of(context).size.width * 0.7,
+                      if (controller.complaint?.image != null)
+                        Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(Routes.VIEW_IMAGE, parameters: {
+                                    "imageUrl": controller.complaint!.image!
+                                  });
+                                },
+                                child: Image.network(
+                                  baseUrl + (controller.complaint?.image ?? ''),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 20),
                       if (controller.complaint?.isSolved == false)
                         Row(
                           children: [

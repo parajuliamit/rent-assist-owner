@@ -28,6 +28,10 @@ import '../modules/rent_viewpage/bindings/rent_viewpage_binding.dart';
 import '../modules/rent_viewpage/views/rent_viewpage_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
+import '../modules/tenant_details/bindings/tenant_details_binding.dart';
+import '../modules/tenant_details/views/tenant_details_view.dart';
+import '../modules/view_image/bindings/view_image_binding.dart';
+import '../modules/view_image/views/view_image_view.dart';
 
 part 'app_routes.dart';
 
@@ -111,6 +115,16 @@ class AppPages {
       name: _Paths.CHOOSE_TENANT,
       page: () => ChooseTenantView(),
       binding: ChooseTenantBinding(),
+    ),
+    GetPage(
+      name: _Paths.TENANT_DETAILS,
+      page: () => TenantDetailsView(),
+      binding: TenantDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIEW_IMAGE,
+      page: () => ViewImageView(),
+      binding: ViewImageBinding(),
     ),
   ];
 }
