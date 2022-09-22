@@ -12,26 +12,23 @@ class BalanceStatusView extends GetView<BalanceStatusController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Obx(() => controller.isLoading.isTrue
-            ? const Loading()
-            : controller.isError.isTrue
-                ? ErrorPage(controller.errorMessage, controller.checkBalance)
-                : SingleChildScrollView(
-                    child: Column(
-                      children: const [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        RentDueContainer(),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        BalanceContainer()
-                      ],
-                    ),
-                  )),
+      appBar: AppBar(
+        title: const Text('Balance'),
       ),
+      body: Obx(() => controller.isLoading.isTrue
+          ? const Loading()
+          : controller.isError.isTrue
+              ? ErrorPage(controller.errorMessage, controller.checkBalance)
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    RentDueContainer(),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    BalanceContainer()
+                  ],
+                )),
     );
   }
 }

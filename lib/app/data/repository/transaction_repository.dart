@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:owner_app/app/data/models/transaction/balance_response.dart';
+import 'package:owner_app/app/data/models/transaction/due_amount.dart';
 
 import '../api/transaction/transaction_api.dart';
 import '../models/transaction/transaction_list.dart';
@@ -19,5 +20,9 @@ class TransactionRepository {
 
   Future<void> withdraw() async {
     return (await TransactionApi(_dio).withdraw());
+  }
+
+  Future<DueAmount> getDueAmount() async {
+    return (await TransactionApi(_dio).getDueAmount());
   }
 }

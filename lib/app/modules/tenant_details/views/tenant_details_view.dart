@@ -61,15 +61,15 @@ class TenantDetailsView extends GetView<TenantDetailsController> {
         appBar: AppBar(
           title: Text(controller.name),
           actions: [
-            IconButton(
-                onPressed: () {
-                  Get.offNamed(Routes.EDIT_TENANT,
-                      arguments: controller.agreement,
-                      parameters: {
-                        "tenant": ((controller.tenant.tenant) ?? 0).toString()
-                      });
-                },
-                icon: const Icon(Icons.edit)),
+            // IconButton(
+            //     onPressed: () {
+            //       Get.offNamed(Routes.EDIT_TENANT,
+            //           arguments: controller.agreement,
+            //           parameters: {
+            //             "tenant": ((controller.tenant.tenant) ?? 0).toString()
+            //           });
+            //     },
+            //     icon: const Icon(Icons.edit)),
             IconButton(
                 onPressed: () {
                   showDialog(

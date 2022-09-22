@@ -13,6 +13,7 @@ class BalanceStatusController extends GetxController {
   String errorMessage = '';
 
   int balance = 0;
+  int rent = 0;
 
   @override
   void onInit() {
@@ -27,6 +28,8 @@ class BalanceStatusController extends GetxController {
     try {
       var response = await transactionRepo.getBalance();
       balance = response.amount?.ceil() ?? 0;
+      var rentResponse = await transactionRepo.getDueAmount();
+      rent = rentResponse.dueAmountSum?.ceil() ?? 0;
     } catch (e) {
       isError.value = true;
       if (e is DioError) {
