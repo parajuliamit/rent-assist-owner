@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:owner_app/app/modules/balance_status/controllers/balance_status_controller.dart';
 import 'package:owner_app/app/routes/app_pages.dart';
+import 'package:owner_app/app/utils/app_utils.dart';
 
 import '../../../../utils/constants.dart';
 import 'balancepage_button.dart';
@@ -44,39 +46,45 @@ class BalanceContainer extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Rs',
                       style: TextStyle(
                           // color: kWhiteColor,
                           fontSize: 22,
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
-                      '22500',
-                      style: TextStyle(
+                      Get.find<BalanceStatusController>().balance.toString(),
+                      style: const TextStyle(
                           // color: kWhiteColor,
                           fontSize: 26,
                           fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                BalancePageButton(
-                    text: 'Withdraw',
-                    textColor: kWhiteColor,
-                    fillColor: kPrimaryColor,
-                    onpress: () {
-                      Get.toNamed(Routes.BALANCE_VIEWPAGE);
-                    }),
-                const SizedBox(
-                  height: 10,
-                ),
+                if (Get.find<BalanceStatusController>().balance > 0)
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      BalancePageButton(
+                          text: 'Withdraw',
+                          textColor: kWhiteColor,
+                          fillColor: kPrimaryColor,
+                          onpress: () {
+                            overlayLoading(
+                                Get.find<BalanceStatusController>().withdraw);
+                          }),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
