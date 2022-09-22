@@ -21,6 +21,7 @@ abstract class Routes {
   static const QR_PAGE = _Paths.ADD_TENANT + _Paths.QR_PAGE;
   static const TENANT_DETAILS = _Paths.TENANT_DETAILS;
   static const VIEW_IMAGE = _Paths.VIEW_IMAGE;
+  static const TRANSACTION_HISTORY = _Paths.TRANSACTION_HISTORY;
 }
 
 abstract class _Paths {
@@ -43,4 +44,5 @@ abstract class _Paths {
   static const QR_PAGE = '/qr-page';
   static const TENANT_DETAILS = '/tenant-details';
   static const VIEW_IMAGE = '/view-image';
+  static const TRANSACTION_HISTORY = '/transaction-history';
 }

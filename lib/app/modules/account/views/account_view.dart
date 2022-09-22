@@ -28,6 +28,13 @@ class AccountView extends GetView<AccountController> {
               },
             ),
             ItemTile(
+              icon: Icons.credit_card,
+              label: 'Transaction History',
+              onPress: () {
+                Get.toNamed(Routes.TRANSACTION_HISTORY);
+              },
+            ),
+            ItemTile(
               icon: Icons.change_circle_outlined,
               label: 'Change Password',
               onPress: () {

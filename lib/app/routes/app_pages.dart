@@ -30,6 +30,7 @@ import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
 import '../modules/tenant_details/bindings/tenant_details_binding.dart';
 import '../modules/tenant_details/views/tenant_details_view.dart';
+import '../modules/transaction_history/views/transaction_history_view.dart';
 import '../modules/view_image/bindings/view_image_binding.dart';
 import '../modules/view_image/views/view_image_view.dart';
 
@@ -125,6 +126,10 @@ class AppPages {
       name: _Paths.VIEW_IMAGE,
       page: () => ViewImageView(),
       binding: ViewImageBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSACTION_HISTORY,
+      page: () => TransactionHistoryView(),
     ),
   ];
 }

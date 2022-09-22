@@ -11,6 +11,7 @@ import 'app/app_controller.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/constants.dart';
 import 'app/app_repository.dart';
+import 'app/widgets/error_page.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
   print('message received');

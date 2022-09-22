@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:owner_app/app/modules/complaint/controllers/complaint_controller.dart';
 import 'package:owner_app/app/modules/home/views/widgets/scan_meter_container.dart';
 import 'package:owner_app/app/modules/home/views/widgets/icon_container.dart';
 import 'package:owner_app/app/modules/notification/controllers/notification_controller.dart';
+import 'package:owner_app/app/modules/tenant_list/controllers/tenant_list_controller.dart';
+import 'package:owner_app/app/modules/transaction_history/controllers/transaction_history_controller.dart';
 import 'package:owner_app/app/routes/app_pages.dart';
 
 import '../../../utils/constants.dart';
+import '../../../widgets/loading.dart';
 import '../../navigation/controllers/navigation_controller.dart';
 import '../controllers/home_controller.dart';
 import 'widgets/complaint_container.dart';
@@ -126,17 +130,34 @@ class HomeView extends GetView<HomeController> {
             const SizedBox(
               height: 10,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Recent Transactions',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 5),
+                    child: Text(
+                      'Recent Transactions',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
-                ),
+                  InkWell(
+                    child: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('History',
+                          style: TextStyle(
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    onTap: () {
+                      Get.toNamed(Routes.TRANSACTION_HISTORY);
+                    },
+                  )
+                ],
               ),
             ),
             Container(
@@ -152,71 +173,92 @@ class HomeView extends GetView<HomeController> {
                           offset: const Offset(0, 3),
                           blurRadius: 10)
                     ]),
-                child: ListView.builder(
-                    itemCount: 5,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 2),
-                            child: Row(
-                              children: [
-                                Container(
-                                    height: 50,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                        color: kPrimaryColor.withOpacity(0.25),
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
-                                    child: const Center(
-                                        child: Text(
-                                      'रू',
-                                      style: TextStyle(
-                                          color: kPrimaryColor,
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w600),
-                                    ))),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: const [
-                                      Text(
-                                        'Electricity Bill',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Paid on 12/12/2020',
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 14),
-                                      ),
-                                    ],
+                child: Obx(
+                  () {
+                    final historyController =
+                        Get.find<TransactionHistoryController>();
+                    return historyController.isLoading.isTrue
+                        ? const Loading()
+                        : ListView.builder(
+                            itemCount: historyController.transactions.length > 5
+                                ? 5
+                                : historyController.transactions.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 2),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                            height: 50,
+                                            width: 50,
+                                            decoration: BoxDecoration(
+                                                color: kPrimaryColor
+                                                    .withOpacity(0.25),
+                                                borderRadius:
+                                                    BorderRadius.circular(12)),
+                                            child: const Center(
+                                                child: Text(
+                                              'रू',
+                                              style: TextStyle(
+                                                  color: kPrimaryColor,
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w600),
+                                            ))),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Obx(() => Text(
+                                                    Get.find<TenantListController>()
+                                                            .isLoading
+                                                            .isTrue
+                                                        ? 'Received'
+                                                        : "${Get.find<TenantListController>().tenants.firstWhere((element) => element.id == historyController.transactions[index].initiator).firstName} ${Get.find<TenantListController>().tenants.firstWhere((element) => element.id == historyController.transactions[index].initiator).lastName}",
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16),
+                                                  )),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                DateFormat.yMMMd('en_US')
+                                                    .format(DateTime.parse(
+                                                        historyController
+                                                            .transactions[index]
+                                                            .paidAt!)),
+                                                style: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 14),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Text(
+                                          'रू ${historyController.transactions[index].amount}',
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                const Text(
-                                  'रू 1000',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Divider()
-                        ],
-                      );
-                    })),
+                                  const Divider()
+                                ],
+                              );
+                            });
+                  },
+                )),
             const SizedBox(
               height: 20,
             ),

@@ -9,6 +9,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'data/interceptor/authentication_interceptor.dart';
 import 'data/repository/auth_repository.dart';
 import 'data/repository/notification_repository.dart';
+import 'data/repository/transaction_repository.dart';
 import 'data/repository/user_repository.dart';
 import 'utils/constants.dart';
 
@@ -58,5 +59,9 @@ class AppRepository extends GetxService {
 
   ChatRepository getChatRepository() {
     return ChatRepository(_dioClient);
+  }
+
+  TransactionRepository getTransactionRepository() {
+    return TransactionRepository(_dioClient);
   }
 }
