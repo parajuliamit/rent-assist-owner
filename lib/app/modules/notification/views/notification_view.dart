@@ -31,57 +31,67 @@ class NotificationView extends GetView<NotificationController> {
                         child: ListView.builder(
                           itemCount: controller.notifications.length,
                           itemBuilder: (context, index) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                  color: kWhiteColor,
-                                  borderRadius: BorderRadius.circular(12),
-                                  border:
-                                      controller.notifications[index].isRead ==
-                                              false
-                                          ? Border.all(color: kPrimaryColor)
-                                          : null,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: kPrimaryColor.withOpacity(0.25),
-                                        spreadRadius: 5,
-                                        offset: const Offset(0, 3),
-                                        blurRadius: 10)
-                                  ]),
-                              margin: EdgeInsets.fromLTRB(
-                                  10,
-                                  index == 0 ? 15 : 10,
-                                  10,
-                                  index == controller.notifications.length - 1
-                                      ? 20
-                                      : 10),
-                              padding: const EdgeInsets.all(15.0),
-                              child: Row(children: [
-                                const Icon(
-                                  Icons.notifications_outlined,
-                                  color: kPrimaryColor,
-                                  size: 28,
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Text(
-                                      controller.notifications[index].title ??
-                                          '',
-                                      maxLines: 3,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w500,
+                            return GestureDetector(
+                              onTap: () {
+                                if (controller.notifications[index].deepLink!
+                                    .contains('config')) {
+                                  Get.toNamed(controller
+                                      .notifications[index].deepLink!);
+                                }
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: kWhiteColor,
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: controller
+                                                .notifications[index].isRead ==
+                                            false
+                                        ? Border.all(color: kPrimaryColor)
+                                        : null,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color:
+                                              kPrimaryColor.withOpacity(0.25),
+                                          spreadRadius: 5,
+                                          offset: const Offset(0, 3),
+                                          blurRadius: 10)
+                                    ]),
+                                margin: EdgeInsets.fromLTRB(
+                                    10,
+                                    index == 0 ? 15 : 5,
+                                    10,
+                                    index == controller.notifications.length - 1
+                                        ? 20
+                                        : 10),
+                                padding: const EdgeInsets.all(15.0),
+                                child: Row(children: [
+                                  const Icon(
+                                    Icons.notifications_outlined,
+                                    color: kPrimaryColor,
+                                    size: 28,
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Text(
+                                        controller.notifications[index].title ??
+                                            '',
+                                        maxLines: 3,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Text(
-                                  convertToAgo(DateTime.parse(
-                                      controller.notifications[index].created ??
-                                          '')),
-                                  style: const TextStyle(color: Colors.grey),
-                                ),
-                              ]),
+                                  Text(
+                                    convertToAgo(DateTime.parse(controller
+                                            .notifications[index].created ??
+                                        '')),
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
+                                ]),
+                              ),
                             );
                           },
                         ),

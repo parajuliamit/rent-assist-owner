@@ -16,11 +16,13 @@ import '../../home/controllers/home_controller.dart';
 
 class ChooseTenantController extends GetxController {
   List<Tenant> tenants = [];
+  bool isConfig = false;
 
   @override
   void onInit() {
     super.onInit();
     tenants = Get.find<TenantListController>().tenants;
+    isConfig = Get.parameters['config'] == 'true';
   }
 
   final imageCropper = ImageCropper();

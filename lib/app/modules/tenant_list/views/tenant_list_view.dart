@@ -8,7 +8,6 @@ import 'package:owner_app/app/widgets/loading.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/constants.dart';
-import '../../home/views/widgets/hompage_button.dart';
 import '../controllers/tenant_list_controller.dart';
 
 class TenantListView extends GetView<TenantListController> {
@@ -53,83 +52,87 @@ class TenantListView extends GetView<TenantListController> {
                             ],
                           ),
                         )
-                      : ListView.builder(
-                          itemCount: controller.tenants.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  15, index == 0 ? 16 : 8, 15, 5),
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  color: kWhiteColor,
-                                  borderRadius: BorderRadius.circular(12),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: kPrimaryColor.withOpacity(0.25),
-                                        spreadRadius: 5,
-                                        offset: const Offset(0, 3),
-                                        blurRadius: 10)
-                                  ]),
-                              child: Row(
-                                children: [
-                                  const CircleAvatar(
-                                    backgroundColor: kGreyColor,
-                                    radius: 25,
-                                    child: Icon(Icons.person),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      '${controller.tenants[index].firstName} ${controller.tenants[index].lastName}',
-                                      style: const TextStyle(
-                                          // color: kWhiteColor,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600),
+                      : RefreshIndicator(
+                          onRefresh: controller.getTenants,
+                          child: ListView.builder(
+                            itemCount: controller.tenants.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: EdgeInsets.fromLTRB(
+                                    15, index == 0 ? 16 : 8, 15, 5),
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: kWhiteColor,
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color:
+                                              kPrimaryColor.withOpacity(0.25),
+                                          spreadRadius: 5,
+                                          offset: const Offset(0, 3),
+                                          blurRadius: 10)
+                                    ]),
+                                child: Row(
+                                  children: [
+                                    const CircleAvatar(
+                                      backgroundColor: kGreyColor,
+                                      radius: 25,
+                                      child: Icon(Icons.person),
                                     ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      SizedBox(
-                                        width: 40,
-                                        child: FloatingActionButton(
-                                          child: const Icon(Icons.call),
-                                          onPressed: () {
-                                            final Uri launchUri = Uri(
-                                              scheme: 'tel',
-                                              path: controller
-                                                  .tenants[index].phoneNumber,
-                                            );
-                                            launchUrl(launchUri);
-                                          },
-                                        ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        '${controller.tenants[index].firstName} ${controller.tenants[index].lastName}',
+                                        style: const TextStyle(
+                                            // color: kWhiteColor,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
                                       ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                        child: FloatingActionButton(
-                                            child: const Icon(Icons.message),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        SizedBox(
+                                          width: 40,
+                                          child: FloatingActionButton(
+                                            child: const Icon(Icons.call),
                                             onPressed: () {
-                                              Get.toNamed(Routes.CHAT,
-                                                  parameters: {
-                                                    "name":
-                                                        '${controller.tenants[index].firstName} ${controller.tenants[index].lastName}',
-                                                    "tenantId": controller
-                                                        .tenants[index].tenant
-                                                        .toString(),
-                                                  });
-                                            }),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            );
-                          },
+                                              final Uri launchUri = Uri(
+                                                scheme: 'tel',
+                                                path: controller
+                                                    .tenants[index].phoneNumber,
+                                              );
+                                              launchUrl(launchUri);
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        SizedBox(
+                                          width: 40,
+                                          child: FloatingActionButton(
+                                              child: const Icon(Icons.message),
+                                              onPressed: () {
+                                                Get.toNamed(Routes.CHAT,
+                                                    parameters: {
+                                                      "name":
+                                                          '${controller.tenants[index].firstName} ${controller.tenants[index].lastName}',
+                                                      "tenantId": controller
+                                                          .tenants[index].tenant
+                                                          .toString(),
+                                                    });
+                                              }),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
         ));
   }

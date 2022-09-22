@@ -165,16 +165,20 @@ class HomeView extends GetView<HomeController> {
                             child: Row(
                               children: [
                                 Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                      color: kPrimaryColor.withOpacity(0.25),
-                                      borderRadius: BorderRadius.circular(12)),
-                                  child: const Icon(
-                                    Icons.attach_money,
-                                    color: kPrimaryColor,
-                                  ),
-                                ),
+                                    height: 50,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                        color: kPrimaryColor.withOpacity(0.25),
+                                        borderRadius:
+                                            BorderRadius.circular(12)),
+                                    child: const Center(
+                                        child: Text(
+                                      'रू',
+                                      style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w600),
+                                    ))),
                                 const SizedBox(
                                   width: 10,
                                 ),
@@ -201,7 +205,7 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                 ),
                                 const Text(
-                                  '₹ 1000',
+                                  'रू 1000',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16),
