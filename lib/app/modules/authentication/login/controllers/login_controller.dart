@@ -63,14 +63,14 @@ class LoginController extends GetxController {
 
   bool validateInput(String email, String password) {
     bool isValid = true;
-    // if (!email.isEmail) {
-    //   emailError("Enter a valid email");
-    //   isValid = false;
-    // }
-    // if (password.length < 8) {
-    //   passwordError("Password must be at least 8 characters");
-    //   isValid = false;
-    // }
+    if (!email.isEmail) {
+      emailError("Enter a valid email");
+      isValid = false;
+    }
+    if (password.length < 8) {
+      passwordError("Password must be at least 8 characters");
+      isValid = false;
+    }
     return isValid;
   }
 

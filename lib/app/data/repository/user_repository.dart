@@ -21,7 +21,7 @@ class UserRepository {
   }
 
   Future<AddTenantResponse> addTenant(
-      AddTenantResponse request, File? image) async {
+      AddTenantRequest request, File? image) async {
     String? fileName = image?.path.split('/').last;
     FormData formData = FormData.fromMap({
       "image": image == null
@@ -31,8 +31,7 @@ class UserRepository {
       "internet_price": request.internetPrice ?? 0,
       "water_usage_price": request.waterUsagePrice ?? 0,
       "nagarpalika_fohr_price": request.nagarpalikaFohrPrice ?? 0,
-      "electricity_rate": request.electricityRate ?? 0,
-      "owner": request.owner
+      "electricity_rate": request.electricityRate ?? 0
     });
     var result = await _dio.post('/api/rooms/', data: formData);
     return AddTenantResponse.fromJson(result.data);

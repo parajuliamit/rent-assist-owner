@@ -65,13 +65,13 @@ class AddTenantController extends GetxController {
         nagarpalikaFohorRate)) {
       try {
         var response = await userRepo.addTenant(
-            AddTenantResponse(
-                price: int.parse(rent),
-                electricityRate: int.parse(electricityRate),
-                waterUsagePrice: int.tryParse(waterPrice),
-                internetPrice: int.tryParse(internetPrice),
-                nagarpalikaFohrPrice: int.tryParse(nagarpalikaFohorRate),
-                owner: 1),
+            AddTenantRequest(
+              price: int.parse(rent),
+              electricityRate: int.parse(electricityRate),
+              waterUsagePrice: int.tryParse(waterPrice),
+              internetPrice: int.tryParse(internetPrice),
+              nagarpalikaFohrPrice: int.tryParse(nagarpalikaFohorRate),
+            ),
             image);
         Get.offNamed(Routes.QR_PAGE, arguments: response);
         showSnackbar('Agreement Uploaded Successfully');
