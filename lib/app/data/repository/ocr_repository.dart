@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:owner_app/app/data/api/ocr/ocr_api.dart';
 import 'package:owner_app/app/data/models/ocr/ocr_response.dart';
+import 'package:owner_app/app/data/models/ocr/scan_batti_response.dart';
 import 'package:owner_app/app/data/models/ocr/set_reading_request.dart';
 
 class OcrRepository {
@@ -12,6 +13,11 @@ class OcrRepository {
 
   Future<void> configMeter(SetElectricityRequest request) async {
     return await OcrApi(_dio).configMeter(request);
+  }
+
+  Future<ScanBattiResponse> calculateBatti(
+      SetElectricityRequest request) async {
+    return await OcrApi(_dio).calculateBatti(request);
   }
 
   Future<String> scanOcr(File image) async {

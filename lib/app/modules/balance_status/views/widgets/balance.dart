@@ -68,7 +68,7 @@ class BalanceContainer extends StatelessWidget {
                   height: 10,
                 ),
                 BalancePageButton(
-                    text: 'View Balance',
+                    text: 'Withdraw',
                     textColor: kWhiteColor,
                     fillColor: kPrimaryColor,
                     onpress: () {

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:owner_app/app/data/models/ocr/scan_batti_response.dart';
 import 'package:owner_app/app/data/models/ocr/set_reading_request.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -12,5 +13,6 @@ abstract class OcrApi {
   Future<void> configMeter(@Body() SetElectricityRequest request);
 
   @POST("/api/ocr/caclculate-batti")
-  Future<void> calculateBatti(@Body() SetElectricityRequest request);
+  Future<ScanBattiResponse> calculateBatti(
+      @Body() SetElectricityRequest request);
 }

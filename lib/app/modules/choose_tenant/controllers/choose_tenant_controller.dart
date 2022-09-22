@@ -118,13 +118,24 @@ class ChooseTenantController extends GetxController {
     await overlayLoading(
       () async {
         try {
-          await ocrRepo.configMeter(
-            SetElectricityRequest(
-              tenant: tenants[selectedTenant].tenant ?? 3,
-              currentReading: double.tryParse(readingController.text) ?? 0,
-            ),
-          );
-          showSnackbar('Meter configured successfully');
+          if (isConfig) {
+            await ocrRepo.configMeter(
+              SetElectricityRequest(
+                tenant: tenants[selectedTenant].tenant ?? 3,
+                currentReading: double.tryParse(readingController.text) ?? 0,
+              ),
+            );
+            showSnackbar('Meter configured successfully');
+          } else {
+            var response = await ocrRepo.calculateBatti(
+              SetElectricityRequest(
+                tenant: tenants[selectedTenant].tenant ?? 3,
+                currentReading: double.tryParse(readingController.text) ?? 0,
+              ),
+            );
+            showSnackbar(
+                "This month unit is: ${response.totalPayableUnitThisMonth}");
+          }
         } catch (e) {
           if (e is DioError) {
             showSnackbar(ServerError.withError(error: e).getErrorMessage(),
