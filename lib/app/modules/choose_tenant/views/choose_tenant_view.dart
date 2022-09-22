@@ -23,6 +23,7 @@ class ChooseTenantView extends GetView<ChooseTenantController> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () async {
+                    controller.selectedTenant = index;
                     await showDialog(
                         context: context,
                         builder: (context) {
@@ -35,9 +36,9 @@ class ChooseTenantView extends GetView<ChooseTenantController> {
                                       icon: Icons.camera_alt_outlined,
                                       title: 'Camera',
                                       onTap: () async {
+                                        Navigator.pop(context);
                                         await controller
                                             .getImage(ImageSource.camera);
-                                        Navigator.pop(context);
                                       }),
                                 ),
                                 const SizedBox(
@@ -48,9 +49,9 @@ class ChooseTenantView extends GetView<ChooseTenantController> {
                                       icon: Icons.image_outlined,
                                       title: 'Gallery',
                                       onTap: () async {
+                                        Navigator.pop(context);
                                         await controller
                                             .getImage(ImageSource.gallery);
-                                        Navigator.pop(context);
                                       }),
                                 ),
                               ],

@@ -1,12 +1,18 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:owner_app/app/data/api/ocr/ocr_api.dart';
 import 'package:owner_app/app/data/models/ocr/ocr_response.dart';
+import 'package:owner_app/app/data/models/ocr/set_reading_request.dart';
 
 class OcrRepository {
   final Dio _dio;
 
   OcrRepository(this._dio);
+
+  Future<void> configMeter(SetElectricityRequest request) async {
+    return await OcrApi(_dio).configMeter(request);
+  }
 
   Future<String> scanOcr(File image) async {
     String fileName = image.path.split('/').last;

@@ -20,8 +20,8 @@ void showSnackbar(String message,
   );
 }
 
-void overlayLoading(Future<void> Function() asyncFunction) {
-  Get.showOverlay(
+Future<void> overlayLoading(Future<void> Function() asyncFunction) async {
+  await Get.showOverlay(
     asyncFunction: asyncFunction,
     opacityColor: Colors.white,
     loadingWidget: const Loading(),
