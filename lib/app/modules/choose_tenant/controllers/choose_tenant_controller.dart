@@ -124,7 +124,7 @@ class ChooseTenantController extends GetxController {
           if (isConfig) {
             await ocrRepo.configMeter(
               SetElectricityRequest(
-                tenant: tenants[selectedTenant].tenant ?? 3,
+                tenant: tenants[selectedTenant].id ?? 3,
                 currentReading: double.tryParse(readingController.text) ?? 0,
               ),
             );
