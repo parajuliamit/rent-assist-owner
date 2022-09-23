@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:owner_app/app/data/models/user/agreement_response.dart';
+import 'package:owner_app/app/data/models/user/create_agreement_request.dart';
 import 'package:owner_app/app/data/models/user/edit_tenant_request.dart';
 
 import '../../../app_repository.dart';
@@ -69,12 +70,12 @@ class EditTenantController extends GetxController {
     if (validateInput(rent, internetPrice, waterPrice, electricityRate,
         nagarpalikaFohorRate)) {
       try {
-        var response = await userRepo.editTenant(EditTenantRequest(
+        var response = await userRepo.createAgreement(CreateAgreementRequest(
             price: int.parse(rent),
             electricityRate: int.parse(electricityRate),
-            waterUsagePrice: int.tryParse(waterPrice),
-            internetPrice: int.tryParse(internetPrice),
-            nagarpalikaFohrPrice: int.tryParse(nagarpalikaFohorRate),
+            waterUsagePrice: int.tryParse(waterPrice) ?? 0,
+            internetPrice: int.tryParse(internetPrice) ?? 0,
+            nagarpalikaFohrPrice: int.tryParse(nagarpalikaFohorRate) ?? 0,
             tenant: tenant));
         Get.back();
         showSnackbar('Agreement Updated Successfully');

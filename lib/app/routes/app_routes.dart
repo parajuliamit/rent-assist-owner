@@ -23,6 +23,7 @@ abstract class Routes {
   static const VIEW_IMAGE = _Paths.VIEW_IMAGE;
   static const TRANSACTION_HISTORY = _Paths.TRANSACTION_HISTORY;
   static const EDIT_TENANT = _Paths.EDIT_TENANT;
+  static const RENT_DETAILS = _Paths.RENT_DETAILS;
 }
 
 abstract class _Paths {
@@ -47,4 +48,5 @@ abstract class _Paths {
   static const VIEW_IMAGE = '/view-image';
   static const TRANSACTION_HISTORY = '/transaction-history';
   static const EDIT_TENANT = '/edit-tenant';
+  static const RENT_DETAILS = '/rent-details';
 }

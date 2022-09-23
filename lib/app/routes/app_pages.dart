@@ -26,6 +26,8 @@ import '../modules/messages/chat/views/chat_view.dart';
 import '../modules/navigation/bindings/navigation_binding.dart';
 import '../modules/navigation/views/navigation_view.dart';
 import '../modules/notification/views/notification_view.dart';
+import '../modules/rent_details/bindings/rent_details_binding.dart';
+import '../modules/rent_details/views/rent_details_view.dart';
 import '../modules/rent_viewpage/bindings/rent_viewpage_binding.dart';
 import '../modules/rent_viewpage/views/rent_viewpage_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
@@ -137,6 +139,11 @@ class AppPages {
       name: _Paths.EDIT_TENANT,
       page: () => EditTenantView(),
       binding: EditTenantBinding(),
+    ),
+    GetPage(
+      name: _Paths.RENT_DETAILS,
+      page: () => RentDetailsView(),
+      binding: RentDetailsBinding(),
     ),
   ];
 }

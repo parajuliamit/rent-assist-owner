@@ -179,84 +179,90 @@ class HomeView extends GetView<HomeController> {
                         Get.find<TransactionHistoryController>();
                     return historyController.isLoading.isTrue
                         ? const Loading()
-                        : ListView.builder(
-                            itemCount: historyController.transactions.length > 5
-                                ? 5
-                                : historyController.transactions.length,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 2),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                            height: 50,
-                                            width: 50,
-                                            decoration: BoxDecoration(
-                                                color: kPrimaryColor
-                                                    .withOpacity(0.25),
-                                                borderRadius:
-                                                    BorderRadius.circular(12)),
-                                            child: const Center(
-                                                child: Text(
-                                              'रू',
-                                              style: TextStyle(
-                                                  color: kPrimaryColor,
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.w600),
-                                            ))),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Obx(() => Text(
-                                                    Get.find<TenantListController>()
-                                                            .isLoading
-                                                            .isTrue
-                                                        ? 'Received'
-                                                        : "${Get.find<TenantListController>().tenants.firstWhere((element) => element.id == historyController.transactions[index].initiator).firstName} ${Get.find<TenantListController>().tenants.firstWhere((element) => element.id == historyController.transactions[index].initiator).lastName}",
+                        : historyController.transactions.isEmpty
+                            ? const Center(child: Text('No Transactions'))
+                            : ListView.builder(
+                                itemCount:
+                                    historyController.transactions.length > 5
+                                        ? 5
+                                        : historyController.transactions.length,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 2),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                    color: kPrimaryColor
+                                                        .withOpacity(0.25),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12)),
+                                                child: const Center(
+                                                    child: Text(
+                                                  'रू',
+                                                  style: TextStyle(
+                                                      color: kPrimaryColor,
+                                                      fontSize: 22,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ))),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Obx(() => Text(
+                                                        Get.find<TenantListController>()
+                                                                .isLoading
+                                                                .isTrue
+                                                            ? 'Received'
+                                                            : "${Get.find<TenantListController>().tenants.firstWhere((element) => element.id == historyController.transactions[index].initiator).firstName} ${Get.find<TenantListController>().tenants.firstWhere((element) => element.id == historyController.transactions[index].initiator).lastName}",
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 16),
+                                                      )),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    DateFormat.yMMMd('en_US')
+                                                        .format(DateTime.parse(
+                                                            historyController
+                                                                .transactions[
+                                                                    index]
+                                                                .paidAt!)),
                                                     style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16),
-                                                  )),
-                                              const SizedBox(
-                                                height: 5,
+                                                        color: Colors.grey,
+                                                        fontSize: 14),
+                                                  ),
+                                                ],
                                               ),
-                                              Text(
-                                                DateFormat.yMMMd('en_US')
-                                                    .format(DateTime.parse(
-                                                        historyController
-                                                            .transactions[index]
-                                                            .paidAt!)),
-                                                style: const TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 14),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                            Text(
+                                              'रू ${historyController.transactions[index].amount}',
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 16),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          'रू ${historyController.transactions[index].amount}',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Divider()
-                                ],
-                              );
-                            });
+                                      ),
+                                      const Divider()
+                                    ],
+                                  );
+                                });
                   },
                 )),
             const SizedBox(

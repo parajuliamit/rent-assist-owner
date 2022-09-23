@@ -7,7 +7,9 @@ import 'package:retrofit/retrofit.dart';
 
 import '../../models/complaints/complaints_response.dart';
 import '../../models/notifications/notification_response.dart';
+import '../../models/user/create_agreement_request.dart';
 import '../../models/user/profile.dart';
+import '../../models/user/rent_response.dart';
 
 part 'user_api.g.dart';
 
@@ -39,4 +41,10 @@ abstract class UserApi {
 
   @GET("/api/contract/documents/")
   Future<List<DocumentResponse>> getDocuments();
+
+  @POST("/api/contract/agreement/")
+  Future<void> createAgreement(@Body() CreateAgreementRequest request);
+
+  @GET("/api/rent/")
+  Future<List<RentResponse>> getRent();
 }

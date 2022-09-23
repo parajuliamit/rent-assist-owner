@@ -17,18 +17,18 @@ class BalanceStatusView extends GetView<BalanceStatusController> {
       ),
       body: Obx(() => controller.isLoading.isTrue
           ? const Loading()
-          : controller.isError.isTrue
-              ? ErrorPage(controller.errorMessage, controller.checkBalance)
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    RentDueContainer(),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    BalanceContainer()
-                  ],
-                )),
+          // : controller.isError.isTrue
+          //     ? ErrorPage(controller.errorMessage, controller.checkBalance)
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                RentDueContainer(),
+                SizedBox(
+                  height: 30,
+                ),
+                BalanceContainer()
+              ],
+            )),
     );
   }
 }

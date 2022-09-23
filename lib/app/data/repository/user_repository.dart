@@ -8,7 +8,9 @@ import 'package:owner_app/app/data/models/user/document_response.dart';
 import 'package:owner_app/app/data/models/user/edit_tenant_request.dart';
 import 'package:owner_app/app/data/models/user/tenant.dart';
 
+import '../models/user/create_agreement_request.dart';
 import '../models/user/profile.dart';
+import '../models/user/rent_response.dart';
 
 class UserRepository {
   final Dio _dio;
@@ -40,17 +42,8 @@ class UserRepository {
     return AddTenantResponse.fromJson(result.data);
   }
 
-  Future<void> editTenant(EditTenantRequest request) async {
-    FormData formData = FormData.fromMap({
-      "image": '',
-      "price": request.price,
-      "internet_price": request.internetPrice ?? 0,
-      "water_usage_price": request.waterUsagePrice ?? 0,
-      "nagarpalika_fohr_price": request.nagarpalikaFohrPrice ?? 0,
-      "electricity_rate": request.electricityRate ?? 0,
-      "tenant": request.tenant
-    });
-    await _dio.post('/api/contract/agreement/', data: formData);
+  Future<void> createAgreement(CreateAgreementRequest request) async {
+    return await UserApi(_dio).createAgreement(request);
   }
 
   Future<List<Agreement>> getAgreements() async {
@@ -63,5 +56,9 @@ class UserRepository {
 
   Future<void> deleteTenant(String id) async {
     await UserApi(_dio).deleteTenant(id);
+  }
+
+  Future<List<RentResponse>> getRent() {
+    return UserApi(_dio).getRent();
   }
 }
