@@ -16,9 +16,7 @@ class NavigationBinding extends Bindings {
     Get.lazyPut<NavigationController>(
       () => NavigationController(),
     );
-    Get.lazyPut<HomeController>(
-      () => HomeController(),
-    );
+    Get.put(HomeController(), permanent: true);
     Get.lazyPut<MessagesController>(
       () => MessagesController(),
     );

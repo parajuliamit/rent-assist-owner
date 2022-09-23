@@ -62,7 +62,7 @@ class TenantDetailsView extends GetView<TenantDetailsController> {
           title: Text(controller.name),
           actions: [
             Obx(() => controller.isLoading.isTrue || controller.isError.isTrue
-                ? SizedBox()
+                ? const SizedBox()
                 : IconButton(
                     onPressed: controller.agreement == null
                         ? null

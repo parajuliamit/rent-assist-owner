@@ -46,17 +46,20 @@ class ChooseTenantController extends GetxController {
       var cropped = (await imageCropper.cropImage(
         sourcePath: image.path,
         cropStyle: CropStyle.rectangle,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.ratio16x9,
-        ],
+
+        // aspectRatioPresets: [
+        //   // CropAspectRatioPreset.ratio16x9,
+        // ],
         uiSettings: [
           AndroidUiSettings(
-              toolbarTitle: 'Crop Reading',
-              toolbarColor: kPrimaryColor,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.ratio16x9,
-              hideBottomControls: true,
-              lockAspectRatio: true),
+            toolbarTitle: 'Crop Reading',
+            toolbarColor: kPrimaryColor,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+
+            // hideBottomControls: true,
+            // lockAspectRatio: true
+          ),
         ],
       ));
 
@@ -130,7 +133,7 @@ class ChooseTenantController extends GetxController {
           } else {
             var response = await ocrRepo.calculateBatti(
               SetElectricityRequest(
-                tenant: tenants[selectedTenant].tenant ?? 3,
+                tenant: tenants[selectedTenant].id ?? 3,
                 currentReading: double.tryParse(readingController.text) ?? 0,
               ),
             );
